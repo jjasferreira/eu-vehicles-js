@@ -1,0 +1,1216 @@
+COUNTRY,YEAR,INDEX,VALUE
+Austria,2014,Cost of Living,89.5
+Austria,2014,Pollution,31.7
+Austria,2014,Purchasing Power,91.5
+Austria,2014,Quality of Life,171.8
+Austria,2014,Traffic Commute Time,24.5
+Austria,2015,Cost of Living,76.9
+Austria,2015,Pollution,34.0
+Austria,2015,Purchasing Power,104.6
+Austria,2015,Quality of Life,182.6
+Austria,2015,Traffic Commute Time,25.9
+Austria,2016,Cost of Living,66.6
+Austria,2016,Pollution,30.8
+Austria,2016,Purchasing Power,120.5
+Austria,2016,Quality of Life,192.4
+Austria,2016,Traffic Commute Time,26.8
+Austria,2017,Cost of Living,71.5
+Austria,2017,Pollution,21.9
+Austria,2017,Purchasing Power,95.7
+Austria,2017,Quality of Life,190.4
+Austria,2017,Traffic Commute Time,26.3
+Austria,2018,Cost of Living,81.5
+Austria,2018,Pollution,22.9
+Austria,2018,Purchasing Power,98.7
+Austria,2018,Quality of Life,190.2
+Austria,2018,Traffic Commute Time,27.0
+Austria,2019,Cost of Living,71.8
+Austria,2019,Pollution,22.0
+Austria,2019,Purchasing Power,96.7
+Austria,2019,Quality of Life,191.1
+Austria,2019,Traffic Commute Time,25.2
+Austria,2020,Cost of Living,70.4
+Austria,2020,Pollution,22.2
+Austria,2020,Purchasing Power,82.4
+Austria,2020,Quality of Life,182.5
+Austria,2020,Traffic Commute Time,26.3
+Austria,2021,Cost of Living,75.5
+Austria,2021,Pollution,19.2
+Austria,2021,Purchasing Power,78.2
+Austria,2021,Quality of Life,182.4
+Austria,2021,Traffic Commute Time,25.7
+Austria,2022,Cost of Living,71.0
+Austria,2022,Pollution,21.7
+Austria,2022,Purchasing Power,77.3
+Austria,2022,Quality of Life,179.2
+Austria,2022,Traffic Commute Time,25.5
+Belgium,2014,Cost of Living,100.0
+Belgium,2014,Pollution,56.2
+Belgium,2014,Purchasing Power,87.9
+Belgium,2014,Quality of Life,134.7
+Belgium,2014,Traffic Commute Time,26.0
+Belgium,2015,Cost of Living,87.2
+Belgium,2015,Pollution,53.8
+Belgium,2015,Purchasing Power,86.2
+Belgium,2015,Quality of Life,136.0
+Belgium,2015,Traffic Commute Time,26.7
+Belgium,2016,Cost of Living,75.4
+Belgium,2016,Pollution,56.6
+Belgium,2016,Purchasing Power,106.7
+Belgium,2016,Quality of Life,162.3
+Belgium,2016,Traffic Commute Time,36.2
+Belgium,2017,Cost of Living,75.4
+Belgium,2017,Pollution,48.9
+Belgium,2017,Purchasing Power,91.0
+Belgium,2017,Quality of Life,160.5
+Belgium,2017,Traffic Commute Time,36.3
+Belgium,2018,Cost of Living,83.3
+Belgium,2018,Pollution,48.9
+Belgium,2018,Purchasing Power,98.9
+Belgium,2018,Quality of Life,164.0
+Belgium,2018,Traffic Commute Time,34.6
+Belgium,2019,Cost of Living,73.0
+Belgium,2019,Pollution,49.9
+Belgium,2019,Purchasing Power,95.1
+Belgium,2019,Quality of Life,162.1
+Belgium,2019,Traffic Commute Time,34.9
+Belgium,2020,Cost of Living,71.8
+Belgium,2020,Pollution,52.9
+Belgium,2020,Purchasing Power,86.3
+Belgium,2020,Quality of Life,153.5
+Belgium,2020,Traffic Commute Time,36.1
+Belgium,2021,Cost of Living,78.5
+Belgium,2021,Pollution,50.3
+Belgium,2021,Purchasing Power,76.5
+Belgium,2021,Quality of Life,150.9
+Belgium,2021,Traffic Commute Time,36.2
+Belgium,2022,Cost of Living,72.6
+Belgium,2022,Pollution,50.1
+Belgium,2022,Purchasing Power,79.7
+Belgium,2022,Quality of Life,151.9
+Belgium,2022,Traffic Commute Time,36.9
+Bulgaria,2014,Cost of Living,50.0
+Bulgaria,2014,Pollution,66.7
+Bulgaria,2014,Purchasing Power,37.4
+Bulgaria,2014,Quality of Life,62.6
+Bulgaria,2014,Traffic Commute Time,34.7
+Bulgaria,2015,Cost of Living,43.6
+Bulgaria,2015,Pollution,64.0
+Bulgaria,2015,Purchasing Power,39.9
+Bulgaria,2015,Quality of Life,68.3
+Bulgaria,2015,Traffic Commute Time,33.4
+Bulgaria,2016,Cost of Living,36.4
+Bulgaria,2016,Pollution,60.4
+Bulgaria,2016,Purchasing Power,59.2
+Bulgaria,2016,Quality of Life,141.6
+Bulgaria,2016,Traffic Commute Time,28.7
+Bulgaria,2017,Cost of Living,36.5
+Bulgaria,2017,Pollution,63.1
+Bulgaria,2017,Purchasing Power,51.4
+Bulgaria,2017,Quality of Life,138.2
+Bulgaria,2017,Traffic Commute Time,27.9
+Bulgaria,2018,Cost of Living,41.2
+Bulgaria,2018,Pollution,63.0
+Bulgaria,2018,Purchasing Power,54.4
+Bulgaria,2018,Quality of Life,129.7
+Bulgaria,2018,Traffic Commute Time,31.1
+Bulgaria,2019,Cost of Living,37.2
+Bulgaria,2019,Pollution,64.0
+Bulgaria,2019,Purchasing Power,52.2
+Bulgaria,2019,Quality of Life,130.6
+Bulgaria,2019,Traffic Commute Time,28.8
+Bulgaria,2020,Cost of Living,36.7
+Bulgaria,2020,Pollution,65.3
+Bulgaria,2020,Purchasing Power,49.4
+Bulgaria,2020,Quality of Life,129.8
+Bulgaria,2020,Traffic Commute Time,29.4
+Bulgaria,2021,Cost of Living,40.9
+Bulgaria,2021,Pollution,64.5
+Bulgaria,2021,Purchasing Power,40.3
+Bulgaria,2021,Quality of Life,126.3
+Bulgaria,2021,Traffic Commute Time,29.4
+Bulgaria,2022,Cost of Living,38.4
+Bulgaria,2022,Pollution,64.3
+Bulgaria,2022,Purchasing Power,46.0
+Bulgaria,2022,Quality of Life,130.1
+Bulgaria,2022,Traffic Commute Time,29.4
+Croatia,2014,Cost of Living,69.0
+Croatia,2014,Pollution,28.7
+Croatia,2014,Purchasing Power,48.3
+Croatia,2014,Quality of Life,108.7
+Croatia,2014,Traffic Commute Time,33.4
+Croatia,2015,Cost of Living,58.9
+Croatia,2015,Pollution,32.8
+Croatia,2015,Purchasing Power,50.5
+Croatia,2015,Quality of Life,112.3
+Croatia,2015,Traffic Commute Time,30.5
+Croatia,2016,Cost of Living,48.2
+Croatia,2016,Pollution,30.4
+Croatia,2016,Purchasing Power,67.9
+Croatia,2016,Quality of Life,172.4
+Croatia,2016,Traffic Commute Time,30.0
+Croatia,2017,Cost of Living,48.0
+Croatia,2017,Pollution,33.3
+Croatia,2017,Purchasing Power,60.7
+Croatia,2017,Quality of Life,170.6
+Croatia,2017,Traffic Commute Time,28.5
+Croatia,2018,Cost of Living,55.1
+Croatia,2018,Pollution,32.7
+Croatia,2018,Purchasing Power,59.8
+Croatia,2018,Quality of Life,162.4
+Croatia,2018,Traffic Commute Time,29.5
+Croatia,2019,Cost of Living,49.2
+Croatia,2019,Pollution,31.0
+Croatia,2019,Purchasing Power,60.3
+Croatia,2019,Quality of Life,165.3
+Croatia,2019,Traffic Commute Time,29.1
+Croatia,2020,Cost of Living,49.7
+Croatia,2020,Pollution,30.5
+Croatia,2020,Purchasing Power,50.4
+Croatia,2020,Quality of Life,159.0
+Croatia,2020,Traffic Commute Time,29.1
+Croatia,2021,Cost of Living,56.4
+Croatia,2021,Pollution,30.6
+Croatia,2021,Purchasing Power,43.1
+Croatia,2021,Quality of Life,156.1
+Croatia,2021,Traffic Commute Time,28.1
+Croatia,2022,Cost of Living,48.9
+Croatia,2022,Pollution,31.2
+Croatia,2022,Purchasing Power,47.5
+Croatia,2022,Quality of Life,159.2
+Croatia,2022,Traffic Commute Time,26.9
+Cyprus,2014,Cost of Living,65.7
+Cyprus,2014,Pollution,37.2
+Cyprus,2014,Purchasing Power,89.1
+Cyprus,2014,Quality of Life,164.1
+Cyprus,2014,Traffic Commute Time,18.3
+Cyprus,2015,Cost of Living,72.5
+Cyprus,2015,Pollution,32.9
+Cyprus,2015,Purchasing Power,71.0
+Cyprus,2015,Quality of Life,154.9
+Cyprus,2015,Traffic Commute Time,19.0
+Cyprus,2016,Cost of Living,63.6
+Cyprus,2016,Pollution,42.9
+Cyprus,2016,Purchasing Power,80.7
+Cyprus,2016,Quality of Life,159.7
+Cyprus,2016,Traffic Commute Time,19.6
+Cyprus,2017,Cost of Living,54.1
+Cyprus,2017,Pollution,54.8
+Cyprus,2017,Purchasing Power,95.9
+Cyprus,2017,Quality of Life,166.6
+Cyprus,2017,Traffic Commute Time,20.3
+Cyprus,2018,Cost of Living,61.6
+Cyprus,2018,Pollution,48.6
+Cyprus,2018,Purchasing Power,72.4
+Cyprus,2018,Quality of Life,155.3
+Cyprus,2018,Traffic Commute Time,21.0
+Cyprus,2019,Cost of Living,55.6
+Cyprus,2019,Pollution,53.8
+Cyprus,2019,Purchasing Power,75.3
+Cyprus,2019,Quality of Life,157.6
+Cyprus,2019,Traffic Commute Time,20.3
+Cyprus,2020,Cost of Living,57.9
+Cyprus,2020,Pollution,53.6
+Cyprus,2020,Purchasing Power,57.4
+Cyprus,2020,Quality of Life,147.9
+Cyprus,2020,Traffic Commute Time,24.0
+Cyprus,2021,Cost of Living,64.0
+Cyprus,2021,Pollution,56.8
+Cyprus,2021,Purchasing Power,52.3
+Cyprus,2021,Quality of Life,144.1
+Cyprus,2021,Traffic Commute Time,23.4
+Cyprus,2022,Cost of Living,59.0
+Cyprus,2022,Pollution,56.9
+Cyprus,2022,Purchasing Power,57.3
+Cyprus,2022,Quality of Life,147.1
+Cyprus,2022,Traffic Commute Time,22.9
+Czechia,2014,Cost of Living,56.6
+Czechia,2014,Pollution,38.3
+Czechia,2014,Purchasing Power,62.3
+Czechia,2014,Quality of Life,123.0
+Czechia,2014,Traffic Commute Time,33.1
+Czechia,2015,Cost of Living,48.5
+Czechia,2015,Pollution,42.9
+Czechia,2015,Purchasing Power,68.1
+Czechia,2015,Quality of Life,127.5
+Czechia,2015,Traffic Commute Time,31.5
+Czechia,2016,Cost of Living,41.8
+Czechia,2016,Pollution,42.5
+Czechia,2016,Purchasing Power,90.0
+Czechia,2016,Quality of Life,167.4
+Czechia,2016,Traffic Commute Time,32.5
+Czechia,2017,Cost of Living,41.2
+Czechia,2017,Pollution,41.0
+Czechia,2017,Purchasing Power,76.2
+Czechia,2017,Quality of Life,165.4
+Czechia,2017,Traffic Commute Time,32.0
+Czechia,2018,Cost of Living,50.1
+Czechia,2018,Pollution,41.0
+Czechia,2018,Purchasing Power,76.3
+Czechia,2018,Quality of Life,162.0
+Czechia,2018,Traffic Commute Time,30.3
+Czechia,2019,Cost of Living,45.1
+Czechia,2019,Pollution,41.0
+Czechia,2019,Purchasing Power,71.3
+Czechia,2019,Quality of Life,158.8
+Czechia,2019,Traffic Commute Time,30.0
+Czechia,2020,Cost of Living,46.1
+Czechia,2020,Pollution,40.2
+Czechia,2020,Purchasing Power,62.8
+Czechia,2020,Quality of Life,156.2
+Czechia,2020,Traffic Commute Time,29.7
+Czechia,2021,Cost of Living,49.2
+Czechia,2021,Pollution,36.3
+Czechia,2021,Purchasing Power,56.4
+Czechia,2021,Quality of Life,156.3
+Czechia,2021,Traffic Commute Time,29.7
+Czechia,2022,Cost of Living,48.2
+Czechia,2022,Pollution,35.9
+Czechia,2022,Purchasing Power,66.5
+Czechia,2022,Quality of Life,162.6
+Czechia,2022,Traffic Commute Time,29.5
+Denmark,2014,Cost of Living,114.9
+Denmark,2014,Pollution,34.8
+Denmark,2014,Purchasing Power,100.7
+Denmark,2014,Quality of Life,178.6
+Denmark,2014,Traffic Commute Time,25.0
+Denmark,2015,Cost of Living,100.6
+Denmark,2015,Pollution,31.8
+Denmark,2015,Purchasing Power,105.7
+Denmark,2015,Quality of Life,190.2
+Denmark,2015,Traffic Commute Time,27.8
+Denmark,2016,Cost of Living,84.9
+Denmark,2016,Pollution,29.9
+Denmark,2016,Purchasing Power,142.1
+Denmark,2016,Quality of Life,206.5
+Denmark,2016,Traffic Commute Time,25.6
+Denmark,2017,Cost of Living,83.0
+Denmark,2017,Pollution,26.0
+Denmark,2017,Purchasing Power,98.8
+Denmark,2017,Quality of Life,184.9
+Denmark,2017,Traffic Commute Time,28.4
+Denmark,2018,Cost of Living,93.3
+Denmark,2018,Pollution,23.6
+Denmark,2018,Purchasing Power,117.5
+Denmark,2018,Quality of Life,197.7
+Denmark,2018,Traffic Commute Time,28.5
+Denmark,2019,Cost of Living,81.4
+Denmark,2019,Pollution,22.1
+Denmark,2019,Purchasing Power,114.4
+Denmark,2019,Quality of Life,198.6
+Denmark,2019,Traffic Commute Time,28.5
+Denmark,2020,Cost of Living,83.0
+Denmark,2020,Pollution,21.3
+Denmark,2020,Purchasing Power,100.9
+Denmark,2020,Quality of Life,192.7
+Denmark,2020,Traffic Commute Time,28.8
+Denmark,2021,Cost of Living,91.7
+Denmark,2021,Pollution,20.4
+Denmark,2021,Purchasing Power,94.7
+Denmark,2021,Quality of Life,190.0
+Denmark,2021,Traffic Commute Time,28.7
+Denmark,2022,Cost of Living,84.1
+Denmark,2022,Pollution,21.0
+Denmark,2022,Purchasing Power,99.5
+Denmark,2022,Quality of Life,192.4
+Denmark,2022,Traffic Commute Time,28.5
+Estonia,2014,Cost of Living,67.3
+Estonia,2014,Pollution,13.4
+Estonia,2014,Purchasing Power,48.7
+Estonia,2014,Quality of Life,145.4
+Estonia,2014,Traffic Commute Time,24.7
+Estonia,2015,Cost of Living,61.2
+Estonia,2015,Pollution,15.5
+Estonia,2015,Purchasing Power,51.4
+Estonia,2015,Quality of Life,144.6
+Estonia,2015,Traffic Commute Time,22.4
+Estonia,2016,Cost of Living,59.1
+Estonia,2016,Pollution,15.9
+Estonia,2016,Purchasing Power,60.0
+Estonia,2016,Quality of Life,158.6
+Estonia,2016,Traffic Commute Time,25.6
+Estonia,2017,Cost of Living,49.5
+Estonia,2017,Pollution,17.7
+Estonia,2017,Purchasing Power,68.5
+Estonia,2017,Quality of Life,171.1
+Estonia,2017,Traffic Commute Time,26.7
+Estonia,2018,Cost of Living,57.6
+Estonia,2018,Pollution,17.2
+Estonia,2018,Purchasing Power,74.8
+Estonia,2018,Quality of Life,176.4
+Estonia,2018,Traffic Commute Time,32.7
+Estonia,2019,Cost of Living,51.0
+Estonia,2019,Pollution,18.1
+Estonia,2019,Purchasing Power,76.0
+Estonia,2019,Quality of Life,180.9
+Estonia,2019,Traffic Commute Time,25.7
+Estonia,2020,Cost of Living,50.9
+Estonia,2020,Pollution,19.8
+Estonia,2020,Purchasing Power,71.3
+Estonia,2020,Quality of Life,177.8
+Estonia,2020,Traffic Commute Time,24.5
+Estonia,2021,Cost of Living,56.5
+Estonia,2021,Pollution,19.0
+Estonia,2021,Purchasing Power,61.2
+Estonia,2021,Quality of Life,173.6
+Estonia,2021,Traffic Commute Time,24.7
+Estonia,2022,Cost of Living,53.7
+Estonia,2022,Pollution,19.7
+Estonia,2022,Purchasing Power,63.5
+Estonia,2022,Quality of Life,174.2
+Estonia,2022,Traffic Commute Time,24.5
+Finland,2014,Cost of Living,103.3
+Finland,2014,Pollution,16.7
+Finland,2014,Purchasing Power,97.9
+Finland,2014,Quality of Life,178.9
+Finland,2014,Traffic Commute Time,37.0
+Finland,2015,Cost of Living,89.7
+Finland,2015,Pollution,14.9
+Finland,2015,Purchasing Power,101.2
+Finland,2015,Quality of Life,190.2
+Finland,2015,Traffic Commute Time,33.2
+Finland,2016,Cost of Living,75.2
+Finland,2016,Pollution,17.8
+Finland,2016,Purchasing Power,132.9
+Finland,2016,Quality of Life,184.0
+Finland,2016,Traffic Commute Time,32.9
+Finland,2017,Cost of Living,73.1
+Finland,2017,Pollution,13.4
+Finland,2017,Purchasing Power,115.0
+Finland,2017,Quality of Life,182.9
+Finland,2017,Traffic Commute Time,34.9
+Finland,2018,Cost of Living,81.7
+Finland,2018,Pollution,12.1
+Finland,2018,Purchasing Power,119.4
+Finland,2018,Quality of Life,195.3
+Finland,2018,Traffic Commute Time,33.2
+Finland,2019,Cost of Living,72.8
+Finland,2019,Pollution,11.9
+Finland,2019,Purchasing Power,112.3
+Finland,2019,Quality of Life,194.0
+Finland,2019,Traffic Commute Time,30.4
+Finland,2020,Cost of Living,70.3
+Finland,2020,Pollution,11.5
+Finland,2020,Purchasing Power,99.9
+Finland,2020,Quality of Life,190.2
+Finland,2020,Traffic Commute Time,29.9
+Finland,2021,Cost of Living,77.5
+Finland,2021,Pollution,11.9
+Finland,2021,Purchasing Power,89.1
+Finland,2021,Quality of Life,182.8
+Finland,2021,Traffic Commute Time,29.0
+Finland,2022,Cost of Living,73.2
+Finland,2022,Pollution,12.1
+Finland,2022,Purchasing Power,91.0
+Finland,2022,Quality of Life,185.0
+Finland,2022,Traffic Commute Time,27.8
+France,2014,Cost of Living,100.2
+France,2014,Pollution,46.9
+France,2014,Purchasing Power,92.3
+France,2014,Quality of Life,136.3
+France,2014,Traffic Commute Time,28.1
+France,2015,Cost of Living,88.4
+France,2015,Pollution,45.9
+France,2015,Purchasing Power,92.6
+France,2015,Quality of Life,139.3
+France,2015,Traffic Commute Time,28.6
+France,2016,Cost of Living,75.3
+France,2016,Pollution,46.3
+France,2016,Purchasing Power,118.5
+France,2016,Quality of Life,173.6
+France,2016,Traffic Commute Time,32.0
+France,2017,Cost of Living,74.9
+France,2017,Pollution,40.2
+France,2017,Purchasing Power,87.3
+France,2017,Quality of Life,160.3
+France,2017,Traffic Commute Time,35.8
+France,2018,Cost of Living,83.9
+France,2018,Pollution,40.4
+France,2018,Purchasing Power,101.2
+France,2018,Quality of Life,166.2
+France,2018,Traffic Commute Time,35.0
+France,2019,Cost of Living,74.9
+France,2019,Pollution,42.7
+France,2019,Purchasing Power,91.6
+France,2019,Quality of Life,157.8
+France,2019,Traffic Commute Time,35.3
+France,2020,Cost of Living,74.1
+France,2020,Pollution,43.6
+France,2020,Purchasing Power,80.4
+France,2020,Quality of Life,153.9
+France,2020,Traffic Commute Time,34.8
+France,2021,Cost of Living,80.6
+France,2021,Pollution,41.8
+France,2021,Purchasing Power,74.1
+France,2021,Quality of Life,150.7
+France,2021,Traffic Commute Time,34.5
+France,2022,Cost of Living,74.1
+France,2022,Pollution,42.4
+France,2022,Purchasing Power,85.4
+France,2022,Quality of Life,156.7
+France,2022,Traffic Commute Time,35.2
+Germany,2014,Cost of Living,87.1
+Germany,2014,Pollution,30.2
+Germany,2014,Purchasing Power,112.3
+Germany,2014,Quality of Life,192.7
+Germany,2014,Traffic Commute Time,36.1
+Germany,2015,Cost of Living,76.3
+Germany,2015,Pollution,28.3
+Germany,2015,Purchasing Power,111.8
+Germany,2015,Quality of Life,195.9
+Germany,2015,Traffic Commute Time,31.1
+Germany,2016,Cost of Living,65.5
+Germany,2016,Pollution,29.9
+Germany,2016,Purchasing Power,147.6
+Germany,2016,Quality of Life,199.7
+Germany,2016,Traffic Commute Time,29.1
+Germany,2017,Cost of Living,65.5
+Germany,2017,Pollution,27.1
+Germany,2017,Purchasing Power,124.9
+Germany,2017,Quality of Life,189.7
+Germany,2017,Traffic Commute Time,30.6
+Germany,2018,Cost of Living,74.3
+Germany,2018,Pollution,27.3
+Germany,2018,Purchasing Power,125.0
+Germany,2018,Quality of Life,190.0
+Germany,2018,Traffic Commute Time,31.3
+Germany,2019,Cost of Living,67.6
+Germany,2019,Pollution,28.0
+Germany,2019,Purchasing Power,116.2
+Germany,2019,Quality of Life,187.0
+Germany,2019,Traffic Commute Time,29.9
+Germany,2020,Cost of Living,65.3
+Germany,2020,Pollution,29.0
+Germany,2020,Purchasing Power,102.4
+Germany,2020,Quality of Life,179.8
+Germany,2020,Traffic Commute Time,31.0
+Germany,2021,Cost of Living,70.6
+Germany,2021,Pollution,27.5
+Germany,2021,Purchasing Power,93.7
+Germany,2021,Quality of Life,176.8
+Germany,2021,Traffic Commute Time,31.4
+Germany,2022,Cost of Living,65.6
+Germany,2022,Pollution,27.8
+Germany,2022,Purchasing Power,103.1
+Germany,2022,Quality of Life,180.3
+Germany,2022,Traffic Commute Time,31.1
+Greece,2014,Cost of Living,83.8
+Greece,2014,Pollution,45.3
+Greece,2014,Purchasing Power,44.3
+Greece,2014,Quality of Life,77.5
+Greece,2014,Traffic Commute Time,37.0
+Greece,2015,Cost of Living,68.9
+Greece,2015,Pollution,44.9
+Greece,2015,Purchasing Power,51.9
+Greece,2015,Quality of Life,94.7
+Greece,2015,Traffic Commute Time,33.2
+Greece,2016,Cost of Living,54.4
+Greece,2016,Pollution,47.2
+Greece,2016,Purchasing Power,79.3
+Greece,2016,Quality of Life,165.4
+Greece,2016,Traffic Commute Time,29.1
+Greece,2017,Cost of Living,55.9
+Greece,2017,Pollution,52.0
+Greece,2017,Purchasing Power,58.2
+Greece,2017,Quality of Life,148.3
+Greece,2017,Traffic Commute Time,31.6
+Greece,2018,Cost of Living,63.2
+Greece,2018,Pollution,52.8
+Greece,2018,Purchasing Power,53.8
+Greece,2018,Quality of Life,137.4
+Greece,2018,Traffic Commute Time,32.2
+Greece,2019,Cost of Living,56.7
+Greece,2019,Pollution,51.9
+Greece,2019,Purchasing Power,49.6
+Greece,2019,Quality of Life,137.8
+Greece,2019,Traffic Commute Time,32.2
+Greece,2020,Cost of Living,55.7
+Greece,2020,Pollution,52.5
+Greece,2020,Purchasing Power,43.7
+Greece,2020,Quality of Life,133.1
+Greece,2020,Traffic Commute Time,33.8
+Greece,2021,Cost of Living,61.0
+Greece,2021,Pollution,51.9
+Greece,2021,Purchasing Power,38.9
+Greece,2021,Quality of Life,129.9
+Greece,2021,Traffic Commute Time,33.9
+Greece,2022,Cost of Living,56.2
+Greece,2022,Pollution,51.9
+Greece,2022,Purchasing Power,39.7
+Greece,2022,Quality of Life,129.2
+Greece,2022,Traffic Commute Time,33.8
+Hungary,2014,Cost of Living,59.3
+Hungary,2014,Pollution,48.3
+Hungary,2014,Purchasing Power,44.9
+Hungary,2014,Quality of Life,83.2
+Hungary,2014,Traffic Commute Time,34.8
+Hungary,2015,Cost of Living,48.9
+Hungary,2015,Pollution,46.3
+Hungary,2015,Purchasing Power,46.9
+Hungary,2015,Quality of Life,93.1
+Hungary,2015,Traffic Commute Time,30.1
+Hungary,2016,Cost of Living,41.3
+Hungary,2016,Pollution,46.7
+Hungary,2016,Purchasing Power,56.3
+Hungary,2016,Quality of Life,140.7
+Hungary,2016,Traffic Commute Time,31.8
+Hungary,2017,Cost of Living,42.8
+Hungary,2017,Pollution,44.0
+Hungary,2017,Purchasing Power,47.5
+Hungary,2017,Quality of Life,138.8
+Hungary,2017,Traffic Commute Time,33.1
+Hungary,2018,Cost of Living,48.6
+Hungary,2018,Pollution,46.6
+Hungary,2018,Purchasing Power,50.6
+Hungary,2018,Quality of Life,132.3
+Hungary,2018,Traffic Commute Time,34.1
+Hungary,2019,Cost of Living,42.0
+Hungary,2019,Pollution,46.5
+Hungary,2019,Purchasing Power,54.7
+Hungary,2019,Quality of Life,134.5
+Hungary,2019,Traffic Commute Time,35.2
+Hungary,2020,Cost of Living,40.9
+Hungary,2020,Pollution,48.3
+Hungary,2020,Purchasing Power,47.6
+Hungary,2020,Quality of Life,128.2
+Hungary,2020,Traffic Commute Time,35.8
+Hungary,2021,Cost of Living,42.7
+Hungary,2021,Pollution,47.8
+Hungary,2021,Purchasing Power,49.8
+Hungary,2021,Quality of Life,134.0
+Hungary,2021,Traffic Commute Time,35.8
+Hungary,2022,Cost of Living,40.7
+Hungary,2022,Pollution,47.9
+Hungary,2022,Purchasing Power,52.0
+Hungary,2022,Quality of Life,137.1
+Hungary,2022,Traffic Commute Time,35.5
+Ireland,2014,Cost of Living,106.6
+Ireland,2014,Pollution,29.3
+Ireland,2014,Purchasing Power,94.6
+Ireland,2014,Quality of Life,142.4
+Ireland,2014,Traffic Commute Time,22.5
+Ireland,2015,Cost of Living,92.1
+Ireland,2015,Pollution,28.0
+Ireland,2015,Purchasing Power,95.7
+Ireland,2015,Quality of Life,148.9
+Ireland,2015,Traffic Commute Time,32.6
+Ireland,2016,Cost of Living,78.0
+Ireland,2016,Pollution,30.8
+Ireland,2016,Purchasing Power,125.7
+Ireland,2016,Quality of Life,171.9
+Ireland,2016,Traffic Commute Time,32.3
+Ireland,2017,Cost of Living,77.0
+Ireland,2017,Pollution,27.2
+Ireland,2017,Purchasing Power,103.5
+Ireland,2017,Quality of Life,166.9
+Ireland,2017,Traffic Commute Time,35.0
+Ireland,2018,Cost of Living,85.4
+Ireland,2018,Pollution,28.7
+Ireland,2018,Purchasing Power,96.1
+Ireland,2018,Quality of Life,163.5
+Ireland,2018,Traffic Commute Time,37.5
+Ireland,2019,Cost of Living,75.3
+Ireland,2019,Pollution,31.1
+Ireland,2019,Purchasing Power,95.1
+Ireland,2019,Quality of Life,160.8
+Ireland,2019,Traffic Commute Time,35.8
+Ireland,2020,Cost of Living,75.9
+Ireland,2020,Pollution,34.0
+Ireland,2020,Purchasing Power,80.9
+Ireland,2020,Quality of Life,153.5
+Ireland,2020,Traffic Commute Time,37.7
+Ireland,2021,Cost of Living,83.1
+Ireland,2021,Pollution,33.6
+Ireland,2021,Purchasing Power,73.8
+Ireland,2021,Quality of Life,150.9
+Ireland,2021,Traffic Commute Time,37.7
+Ireland,2022,Cost of Living,76.1
+Ireland,2022,Pollution,34.8
+Ireland,2022,Purchasing Power,82.3
+Ireland,2022,Quality of Life,154.5
+Ireland,2022,Traffic Commute Time,37.9
+Italy,2014,Cost of Living,96.8
+Italy,2014,Pollution,60.4
+Italy,2014,Purchasing Power,75.4
+Italy,2014,Quality of Life,90.6
+Italy,2014,Traffic Commute Time,38.0
+Italy,2015,Cost of Living,82.7
+Italy,2015,Pollution,57.7
+Italy,2015,Purchasing Power,79.4
+Italy,2015,Quality of Life,101.0
+Italy,2015,Traffic Commute Time,35.9
+Italy,2016,Cost of Living,68.8
+Italy,2016,Pollution,56.6
+Italy,2016,Purchasing Power,105.7
+Italy,2016,Quality of Life,159.3
+Italy,2016,Traffic Commute Time,36.5
+Italy,2017,Cost of Living,83.7
+Italy,2017,Pollution,51.6
+Italy,2017,Purchasing Power,71.8
+Italy,2017,Quality of Life,142.5
+Italy,2017,Traffic Commute Time,36.4
+Italy,2018,Cost of Living,79.1
+Italy,2018,Pollution,53.1
+Italy,2018,Purchasing Power,81.1
+Italy,2018,Quality of Life,146.1
+Italy,2018,Traffic Commute Time,37.0
+Italy,2019,Cost of Living,69.2
+Italy,2019,Pollution,53.8
+Italy,2019,Purchasing Power,77.5
+Italy,2019,Quality of Life,145.7
+Italy,2019,Traffic Commute Time,34.7
+Italy,2020,Cost of Living,67.3
+Italy,2020,Pollution,55.6
+Italy,2020,Purchasing Power,65.6
+Italy,2020,Quality of Life,140.8
+Italy,2020,Traffic Commute Time,34.4
+Italy,2021,Cost of Living,73.1
+Italy,2021,Pollution,53.9
+Italy,2021,Purchasing Power,58.7
+Italy,2021,Quality of Life,138.6
+Italy,2021,Traffic Commute Time,34.2
+Italy,2022,Cost of Living,66.5
+Italy,2022,Pollution,54.1
+Italy,2022,Purchasing Power,61.7
+Italy,2022,Quality of Life,141.1
+Italy,2022,Traffic Commute Time,33.8
+Latvia,2014,Cost of Living,55.7
+Latvia,2014,Pollution,44.2
+Latvia,2014,Purchasing Power,45.9
+Latvia,2014,Quality of Life,98.1
+Latvia,2014,Traffic Commute Time,24.1
+Latvia,2015,Cost of Living,55.9
+Latvia,2015,Pollution,43.4
+Latvia,2015,Purchasing Power,44.4
+Latvia,2015,Quality of Life,99.0
+Latvia,2015,Traffic Commute Time,24.0
+Latvia,2016,Cost of Living,53.9
+Latvia,2016,Pollution,41.0
+Latvia,2016,Purchasing Power,47.4
+Latvia,2016,Quality of Life,113.4
+Latvia,2016,Traffic Commute Time,26.3
+Latvia,2017,Cost of Living,53.0
+Latvia,2017,Pollution,39.5
+Latvia,2017,Purchasing Power,48.1
+Latvia,2017,Quality of Life,121.0
+Latvia,2017,Traffic Commute Time,27.5
+Latvia,2018,Cost of Living,52.1
+Latvia,2018,Pollution,37.9
+Latvia,2018,Purchasing Power,48.9
+Latvia,2018,Quality of Life,128.6
+Latvia,2018,Traffic Commute Time,28.6
+Latvia,2019,Cost of Living,49.2
+Latvia,2019,Pollution,35.0
+Latvia,2019,Purchasing Power,55.2
+Latvia,2019,Quality of Life,149.2
+Latvia,2019,Traffic Commute Time,31.4
+Latvia,2020,Cost of Living,47.9
+Latvia,2020,Pollution,33.7
+Latvia,2020,Purchasing Power,52.5
+Latvia,2020,Quality of Life,150.0
+Latvia,2020,Traffic Commute Time,32.9
+Latvia,2021,Cost of Living,52.9
+Latvia,2021,Pollution,33.9
+Latvia,2021,Purchasing Power,45.9
+Latvia,2021,Quality of Life,147.6
+Latvia,2021,Traffic Commute Time,31.2
+Latvia,2022,Cost of Living,48.5
+Latvia,2022,Pollution,32.7
+Latvia,2022,Purchasing Power,51.6
+Latvia,2022,Quality of Life,150.8
+Latvia,2022,Traffic Commute Time,31.2
+Lithuania,2014,Cost of Living,60.0
+Lithuania,2014,Pollution,21.1
+Lithuania,2014,Purchasing Power,43.2
+Lithuania,2014,Quality of Life,121.9
+Lithuania,2014,Traffic Commute Time,22.0
+Lithuania,2015,Cost of Living,52.8
+Lithuania,2015,Pollution,29.6
+Lithuania,2015,Purchasing Power,46.9
+Lithuania,2015,Quality of Life,112.9
+Lithuania,2015,Traffic Commute Time,31.3
+Lithuania,2016,Cost of Living,45.6
+Lithuania,2016,Pollution,30.9
+Lithuania,2016,Purchasing Power,61.3
+Lithuania,2016,Quality of Life,134.3
+Lithuania,2016,Traffic Commute Time,30.2
+Lithuania,2017,Cost of Living,46.7
+Lithuania,2017,Pollution,34.3
+Lithuania,2017,Purchasing Power,51.7
+Lithuania,2017,Quality of Life,130.3
+Lithuania,2017,Traffic Commute Time,28.0
+Lithuania,2018,Cost of Living,53.2
+Lithuania,2018,Pollution,33.1
+Lithuania,2018,Purchasing Power,57.3
+Lithuania,2018,Quality of Life,149.0
+Lithuania,2018,Traffic Commute Time,28.7
+Lithuania,2019,Cost of Living,45.9
+Lithuania,2019,Pollution,30.8
+Lithuania,2019,Purchasing Power,60.3
+Lithuania,2019,Quality of Life,156.4
+Lithuania,2019,Traffic Commute Time,27.2
+Lithuania,2020,Cost of Living,44.3
+Lithuania,2020,Pollution,28.8
+Lithuania,2020,Purchasing Power,57.8
+Lithuania,2020,Quality of Life,159.4
+Lithuania,2020,Traffic Commute Time,26.1
+Lithuania,2021,Cost of Living,47.7
+Lithuania,2021,Pollution,27.0
+Lithuania,2021,Purchasing Power,54.6
+Lithuania,2021,Quality of Life,160.0
+Lithuania,2021,Traffic Commute Time,25.7
+Lithuania,2022,Cost of Living,45.6
+Lithuania,2022,Pollution,26.7
+Lithuania,2022,Purchasing Power,58.7
+Lithuania,2022,Quality of Life,161.8
+Lithuania,2022,Traffic Commute Time,26.0
+Luxembourg,2014,Cost of Living,108.8
+Luxembourg,2014,Pollution,26.4
+Luxembourg,2014,Purchasing Power,107.2
+Luxembourg,2014,Quality of Life,162.0
+Luxembourg,2014,Traffic Commute Time,27.9
+Luxembourg,2015,Cost of Living,95.4
+Luxembourg,2015,Pollution,25.3
+Luxembourg,2015,Purchasing Power,106.5
+Luxembourg,2015,Quality of Life,164.6
+Luxembourg,2015,Traffic Commute Time,27.0
+Luxembourg,2016,Cost of Living,81.9
+Luxembourg,2016,Pollution,26.3
+Luxembourg,2016,Purchasing Power,136.2
+Luxembourg,2016,Quality of Life,189.8
+Luxembourg,2016,Traffic Commute Time,30.7
+Luxembourg,2017,Cost of Living,81.8
+Luxembourg,2017,Pollution,23.1
+Luxembourg,2017,Purchasing Power,110.6
+Luxembourg,2017,Quality of Life,181.1
+Luxembourg,2017,Traffic Commute Time,32.5
+Luxembourg,2018,Cost of Living,91.6
+Luxembourg,2018,Pollution,23.2
+Luxembourg,2018,Purchasing Power,119.7
+Luxembourg,2018,Quality of Life,184.7
+Luxembourg,2018,Traffic Commute Time,32.0
+Luxembourg,2019,Cost of Living,81.8
+Luxembourg,2019,Pollution,24.0
+Luxembourg,2019,Purchasing Power,111.6
+Luxembourg,2019,Quality of Life,179.9
+Luxembourg,2019,Traffic Commute Time,31.7
+Luxembourg,2020,Cost of Living,80.1
+Luxembourg,2020,Pollution,24.9
+Luxembourg,2020,Purchasing Power,99.2
+Luxembourg,2020,Quality of Life,172.9
+Luxembourg,2020,Traffic Commute Time,32.3
+Luxembourg,2021,Cost of Living,87.1
+Luxembourg,2021,Pollution,23.7
+Luxembourg,2021,Purchasing Power,90.0
+Luxembourg,2021,Quality of Life,169.8
+Luxembourg,2021,Traffic Commute Time,32.4
+Luxembourg,2022,Cost of Living,80.5
+Luxembourg,2022,Pollution,23.9
+Luxembourg,2022,Purchasing Power,98.8
+Luxembourg,2022,Quality of Life,173.6
+Luxembourg,2022,Traffic Commute Time,32.7
+Malta,2014,Cost of Living,99.0
+Malta,2014,Pollution,79.5
+Malta,2014,Purchasing Power,51.1
+Malta,2014,Quality of Life,67.7
+Malta,2014,Traffic Commute Time,32.0
+Malta,2015,Cost of Living,83.0
+Malta,2015,Pollution,77.4
+Malta,2015,Purchasing Power,56.8
+Malta,2015,Quality of Life,79.1
+Malta,2015,Traffic Commute Time,29.5
+Malta,2016,Cost of Living,67.3
+Malta,2016,Pollution,78.6
+Malta,2016,Purchasing Power,81.2
+Malta,2016,Quality of Life,131.4
+Malta,2016,Traffic Commute Time,27.9
+Malta,2017,Cost of Living,75.5
+Malta,2017,Pollution,79.1
+Malta,2017,Purchasing Power,57.4
+Malta,2017,Quality of Life,117.7
+Malta,2017,Traffic Commute Time,29.1
+Malta,2018,Cost of Living,78.4
+Malta,2018,Pollution,80.9
+Malta,2018,Purchasing Power,58.9
+Malta,2018,Quality of Life,114.9
+Malta,2018,Traffic Commute Time,29.6
+Malta,2019,Cost of Living,69.5
+Malta,2019,Pollution,80.7
+Malta,2019,Purchasing Power,55.3
+Malta,2019,Quality of Life,114.9
+Malta,2019,Traffic Commute Time,28.7
+Malta,2020,Cost of Living,67.9
+Malta,2020,Pollution,82.5
+Malta,2020,Purchasing Power,47.8
+Malta,2020,Quality of Life,111.0
+Malta,2020,Traffic Commute Time,29.3
+Malta,2021,Cost of Living,74.1
+Malta,2021,Pollution,80.8
+Malta,2021,Purchasing Power,42.7
+Malta,2021,Quality of Life,108.8
+Malta,2021,Traffic Commute Time,29.3
+Malta,2022,Cost of Living,67.8
+Malta,2022,Pollution,81.0
+Malta,2022,Purchasing Power,44.2
+Malta,2022,Quality of Life,109.5
+Malta,2022,Traffic Commute Time,29.1
+Netherlands,2014,Cost of Living,98.8
+Netherlands,2014,Pollution,32.4
+Netherlands,2014,Purchasing Power,97.5
+Netherlands,2014,Quality of Life,161.0
+Netherlands,2014,Traffic Commute Time,35.1
+Netherlands,2015,Cost of Living,86.0
+Netherlands,2015,Pollution,35.0
+Netherlands,2015,Purchasing Power,102.0
+Netherlands,2015,Quality of Life,166.8
+Netherlands,2015,Traffic Commute Time,35.5
+Netherlands,2016,Cost of Living,72.1
+Netherlands,2016,Pollution,32.8
+Netherlands,2016,Purchasing Power,129.3
+Netherlands,2016,Quality of Life,192.4
+Netherlands,2016,Traffic Commute Time,35.5
+Netherlands,2017,Cost of Living,72.5
+Netherlands,2017,Pollution,27.6
+Netherlands,2017,Purchasing Power,86.5
+Netherlands,2017,Quality of Life,175.2
+Netherlands,2017,Traffic Commute Time,33.9
+Netherlands,2018,Cost of Living,82.7
+Netherlands,2018,Pollution,27.2
+Netherlands,2018,Purchasing Power,109.5
+Netherlands,2018,Quality of Life,191.3
+Netherlands,2018,Traffic Commute Time,32.7
+Netherlands,2019,Cost of Living,74.8
+Netherlands,2019,Pollution,27.4
+Netherlands,2019,Purchasing Power,102.5
+Netherlands,2019,Quality of Life,188.9
+Netherlands,2019,Traffic Commute Time,29.9
+Netherlands,2020,Cost of Living,73.7
+Netherlands,2020,Pollution,27.4
+Netherlands,2020,Purchasing Power,90.7
+Netherlands,2020,Quality of Life,183.7
+Netherlands,2020,Traffic Commute Time,29.4
+Netherlands,2021,Cost of Living,78.6
+Netherlands,2021,Pollution,25.3
+Netherlands,2021,Purchasing Power,83.9
+Netherlands,2021,Quality of Life,183.3
+Netherlands,2021,Traffic Commute Time,27.8
+Netherlands,2022,Cost of Living,75.7
+Netherlands,2022,Pollution,25.1
+Netherlands,2022,Purchasing Power,88.0
+Netherlands,2022,Quality of Life,185.4
+Netherlands,2022,Traffic Commute Time,27.4
+Poland,2014,Cost of Living,53.7
+Poland,2014,Pollution,50.5
+Poland,2014,Purchasing Power,57.6
+Poland,2014,Quality of Life,95.2
+Poland,2014,Traffic Commute Time,35.3
+Poland,2015,Cost of Living,45.1
+Poland,2015,Pollution,50.6
+Poland,2015,Purchasing Power,63.5
+Poland,2015,Quality of Life,109.7
+Poland,2015,Traffic Commute Time,34.7
+Poland,2016,Cost of Living,38.5
+Poland,2016,Pollution,49.9
+Poland,2016,Purchasing Power,80.8
+Poland,2016,Quality of Life,153.6
+Poland,2016,Traffic Commute Time,34.5
+Poland,2017,Cost of Living,38.1
+Poland,2017,Pollution,50.3
+Poland,2017,Purchasing Power,71.8
+Poland,2017,Quality of Life,150.2
+Poland,2017,Traffic Commute Time,34.6
+Poland,2018,Cost of Living,45.2
+Poland,2018,Pollution,51.1
+Poland,2018,Purchasing Power,74.4
+Poland,2018,Quality of Life,146.6
+Poland,2018,Traffic Commute Time,33.6
+Poland,2019,Cost of Living,39.1
+Poland,2019,Pollution,52.4
+Poland,2019,Purchasing Power,70.0
+Poland,2019,Quality of Life,148.0
+Poland,2019,Traffic Commute Time,32.2
+Poland,2020,Cost of Living,40.0
+Poland,2020,Pollution,54.5
+Poland,2020,Purchasing Power,59.6
+Poland,2020,Quality of Life,141.8
+Poland,2020,Traffic Commute Time,31.7
+Poland,2021,Cost of Living,42.0
+Poland,2021,Pollution,54.3
+Poland,2021,Purchasing Power,47.1
+Poland,2021,Quality of Life,132.6
+Poland,2021,Traffic Commute Time,31.3
+Poland,2022,Cost of Living,39.0
+Poland,2022,Pollution,54.7
+Poland,2022,Purchasing Power,60.0
+Poland,2022,Quality of Life,140.0
+Poland,2022,Traffic Commute Time,31.8
+Portugal,2014,Cost of Living,69.3
+Portugal,2014,Pollution,30.9
+Portugal,2014,Purchasing Power,54.6
+Portugal,2014,Quality of Life,124.7
+Portugal,2014,Traffic Commute Time,28.9
+Portugal,2015,Cost of Living,58.2
+Portugal,2015,Pollution,32.6
+Portugal,2015,Purchasing Power,58.2
+Portugal,2015,Quality of Life,129.2
+Portugal,2015,Traffic Commute Time,28.2
+Portugal,2016,Cost of Living,49.8
+Portugal,2016,Pollution,31.8
+Portugal,2016,Purchasing Power,75.5
+Portugal,2016,Quality of Life,181.2
+Portugal,2016,Traffic Commute Time,30.6
+Portugal,2017,Cost of Living,49.2
+Portugal,2017,Pollution,28.9
+Portugal,2017,Purchasing Power,62.7
+Portugal,2017,Quality of Life,178.4
+Portugal,2017,Traffic Commute Time,30.4
+Portugal,2018,Cost of Living,55.9
+Portugal,2018,Pollution,30.5
+Portugal,2018,Purchasing Power,62.0
+Portugal,2018,Quality of Life,166.7
+Portugal,2018,Traffic Commute Time,30.3
+Portugal,2019,Cost of Living,50.4
+Portugal,2019,Pollution,31.6
+Portugal,2019,Purchasing Power,55.2
+Portugal,2019,Quality of Life,163.5
+Portugal,2019,Traffic Commute Time,29.0
+Portugal,2020,Cost of Living,49.5
+Portugal,2020,Pollution,30.9
+Portugal,2020,Purchasing Power,49.4
+Portugal,2020,Quality of Life,162.9
+Portugal,2020,Traffic Commute Time,30.0
+Portugal,2021,Cost of Living,52.9
+Portugal,2021,Pollution,29.6
+Portugal,2021,Purchasing Power,45.0
+Portugal,2021,Quality of Life,161.9
+Portugal,2021,Traffic Commute Time,29.6
+Portugal,2022,Cost of Living,47.9
+Portugal,2022,Pollution,30.5
+Portugal,2022,Purchasing Power,46.8
+Portugal,2022,Quality of Life,162.5
+Portugal,2022,Traffic Commute Time,29.9
+Romania,2014,Cost of Living,48.2
+Romania,2014,Pollution,62.6
+Romania,2014,Purchasing Power,36.5
+Romania,2014,Quality of Life,63.3
+Romania,2014,Traffic Commute Time,33.3
+Romania,2015,Cost of Living,42.4
+Romania,2015,Pollution,50.5
+Romania,2015,Purchasing Power,40.6
+Romania,2015,Quality of Life,83.6
+Romania,2015,Traffic Commute Time,30.7
+Romania,2016,Cost of Living,34.8
+Romania,2016,Pollution,50.5
+Romania,2016,Purchasing Power,61.9
+Romania,2016,Quality of Life,146.1
+Romania,2016,Traffic Commute Time,33.3
+Romania,2017,Cost of Living,35.6
+Romania,2017,Pollution,50.9
+Romania,2017,Purchasing Power,53.4
+Romania,2017,Quality of Life,143.0
+Romania,2017,Traffic Commute Time,32.0
+Romania,2018,Cost of Living,39.7
+Romania,2018,Pollution,53.0
+Romania,2018,Purchasing Power,66.2
+Romania,2018,Quality of Life,144.0
+Romania,2018,Traffic Commute Time,33.4
+Romania,2019,Cost of Living,36.5
+Romania,2019,Pollution,55.4
+Romania,2019,Purchasing Power,61.2
+Romania,2019,Quality of Life,140.3
+Romania,2019,Traffic Commute Time,34.4
+Romania,2020,Cost of Living,35.3
+Romania,2020,Pollution,58.4
+Romania,2020,Purchasing Power,48.9
+Romania,2020,Quality of Life,132.4
+Romania,2020,Traffic Commute Time,34.7
+Romania,2021,Cost of Living,38.5
+Romania,2021,Pollution,58.4
+Romania,2021,Purchasing Power,45.2
+Romania,2021,Quality of Life,131.7
+Romania,2021,Traffic Commute Time,34.1
+Romania,2022,Cost of Living,35.2
+Romania,2022,Pollution,58.6
+Romania,2022,Purchasing Power,48.1
+Romania,2022,Quality of Life,133.4
+Romania,2022,Traffic Commute Time,33.6
+Slovakia,2014,Cost of Living,61.5
+Slovakia,2014,Pollution,40.8
+Slovakia,2014,Purchasing Power,52.4
+Slovakia,2014,Quality of Life,108.7
+Slovakia,2014,Traffic Commute Time,37.5
+Slovakia,2015,Cost of Living,51.6
+Slovakia,2015,Pollution,47.9
+Slovakia,2015,Purchasing Power,56.0
+Slovakia,2015,Quality of Life,109.1
+Slovakia,2015,Traffic Commute Time,30.4
+Slovakia,2016,Cost of Living,52.3
+Slovakia,2016,Pollution,43.2
+Slovakia,2016,Purchasing Power,58.7
+Slovakia,2016,Quality of Life,128.8
+Slovakia,2016,Traffic Commute Time,33.6
+Slovakia,2017,Cost of Living,44.9
+Slovakia,2017,Pollution,43.5
+Slovakia,2017,Purchasing Power,64.7
+Slovakia,2017,Quality of Life,152.5
+Slovakia,2017,Traffic Commute Time,36.0
+Slovakia,2018,Cost of Living,50.4
+Slovakia,2018,Pollution,40.7
+Slovakia,2018,Purchasing Power,67.3
+Slovakia,2018,Quality of Life,155.4
+Slovakia,2018,Traffic Commute Time,32.2
+Slovakia,2019,Cost of Living,45.0
+Slovakia,2019,Pollution,41.9
+Slovakia,2019,Purchasing Power,63.2
+Slovakia,2019,Quality of Life,153.1
+Slovakia,2019,Traffic Commute Time,29.6
+Slovakia,2020,Cost of Living,44.5
+Slovakia,2020,Pollution,39.7
+Slovakia,2020,Purchasing Power,56.9
+Slovakia,2020,Quality of Life,152.5
+Slovakia,2020,Traffic Commute Time,29.1
+Slovakia,2021,Cost of Living,49.1
+Slovakia,2021,Pollution,39.1
+Slovakia,2021,Purchasing Power,50.4
+Slovakia,2021,Quality of Life,149.7
+Slovakia,2021,Traffic Commute Time,27.8
+Slovakia,2022,Cost of Living,44.7
+Slovakia,2022,Pollution,39.1
+Slovakia,2022,Purchasing Power,54.7
+Slovakia,2022,Quality of Life,151.2
+Slovakia,2022,Traffic Commute Time,28.2
+Slovenia,2014,Cost of Living,75.4
+Slovenia,2014,Pollution,33.0
+Slovenia,2014,Purchasing Power,60.4
+Slovenia,2014,Quality of Life,125.6
+Slovenia,2014,Traffic Commute Time,20.7
+Slovenia,2015,Cost of Living,65.1
+Slovenia,2015,Pollution,31.4
+Slovenia,2015,Purchasing Power,64.2
+Slovenia,2015,Quality of Life,134.5
+Slovenia,2015,Traffic Commute Time,18.8
+Slovenia,2016,Cost of Living,52.2
+Slovenia,2016,Pollution,28.2
+Slovenia,2016,Purchasing Power,89.8
+Slovenia,2016,Quality of Life,175.9
+Slovenia,2016,Traffic Commute Time,25.0
+Slovenia,2017,Cost of Living,53.2
+Slovenia,2017,Pollution,26.4
+Slovenia,2017,Purchasing Power,78.2
+Slovenia,2017,Quality of Life,175.5
+Slovenia,2017,Traffic Commute Time,26.5
+Slovenia,2018,Cost of Living,59.6
+Slovenia,2018,Pollution,26.2
+Slovenia,2018,Purchasing Power,80.3
+Slovenia,2018,Quality of Life,175.4
+Slovenia,2018,Traffic Commute Time,27.8
+Slovenia,2019,Cost of Living,52.5
+Slovenia,2019,Pollution,24.3
+Slovenia,2019,Purchasing Power,75.4
+Slovenia,2019,Quality of Life,176.0
+Slovenia,2019,Traffic Commute Time,24.8
+Slovenia,2020,Cost of Living,53.4
+Slovenia,2020,Pollution,24.1
+Slovenia,2020,Purchasing Power,66.3
+Slovenia,2020,Quality of Life,172.2
+Slovenia,2020,Traffic Commute Time,27.3
+Slovenia,2021,Cost of Living,59.4
+Slovenia,2021,Pollution,22.7
+Slovenia,2021,Purchasing Power,56.1
+Slovenia,2021,Quality of Life,168.2
+Slovenia,2021,Traffic Commute Time,26.8
+Slovenia,2022,Cost of Living,53.9
+Slovenia,2022,Pollution,22.9
+Slovenia,2022,Purchasing Power,59.5
+Slovenia,2022,Quality of Life,169.0
+Slovenia,2022,Traffic Commute Time,26.5
+Spain,2014,Cost of Living,77.2
+Spain,2014,Pollution,49.8
+Spain,2014,Purchasing Power,72.5
+Spain,2014,Quality of Life,123.6
+Spain,2014,Traffic Commute Time,32.0
+Spain,2015,Cost of Living,65.7
+Spain,2015,Pollution,46.3
+Spain,2015,Purchasing Power,76.7
+Spain,2015,Quality of Life,134.9
+Spain,2015,Traffic Commute Time,28.9
+Spain,2016,Cost of Living,56.1
+Spain,2016,Pollution,46.6
+Spain,2016,Purchasing Power,105.3
+Spain,2016,Quality of Life,186.4
+Spain,2016,Traffic Commute Time,30.5
+Spain,2017,Cost of Living,55.0
+Spain,2017,Pollution,37.5
+Spain,2017,Purchasing Power,87.9
+Spain,2017,Quality of Life,183.6
+Spain,2017,Traffic Commute Time,32.6
+Spain,2018,Cost of Living,61.8
+Spain,2018,Pollution,38.1
+Spain,2018,Purchasing Power,90.7
+Spain,2018,Quality of Life,174.9
+Spain,2018,Traffic Commute Time,31.4
+Spain,2019,Cost of Living,54.7
+Spain,2019,Pollution,39.4
+Spain,2019,Purchasing Power,83.8
+Spain,2019,Quality of Life,174.2
+Spain,2019,Traffic Commute Time,29.4
+Spain,2020,Cost of Living,53.8
+Spain,2020,Pollution,40.0
+Spain,2020,Purchasing Power,72.0
+Spain,2020,Quality of Life,169.8
+Spain,2020,Traffic Commute Time,29.1
+Spain,2021,Cost of Living,59.1
+Spain,2021,Pollution,39.6
+Spain,2021,Purchasing Power,62.7
+Spain,2021,Quality of Life,164.5
+Spain,2021,Traffic Commute Time,29.4
+Spain,2022,Cost of Living,53.9
+Spain,2022,Pollution,39.7
+Spain,2022,Purchasing Power,70.0
+Spain,2022,Quality of Life,168.5
+Spain,2022,Traffic Commute Time,29.2
+Sweden,2014,Cost of Living,103.7
+Sweden,2014,Pollution,17.5
+Sweden,2014,Purchasing Power,106.1
+Sweden,2014,Quality of Life,180.9
+Sweden,2014,Traffic Commute Time,34.1
+Sweden,2015,Cost of Living,82.9
+Sweden,2015,Pollution,15.1
+Sweden,2015,Purchasing Power,110.9
+Sweden,2015,Quality of Life,193.9
+Sweden,2015,Traffic Commute Time,26.9
+Sweden,2016,Cost of Living,75.7
+Sweden,2016,Pollution,18.3
+Sweden,2016,Purchasing Power,128.2
+Sweden,2016,Quality of Life,185.8
+Sweden,2016,Traffic Commute Time,32.0
+Sweden,2017,Cost of Living,75.9
+Sweden,2017,Pollution,17.9
+Sweden,2017,Purchasing Power,107.2
+Sweden,2017,Quality of Life,172.7
+Sweden,2017,Traffic Commute Time,31.6
+Sweden,2018,Cost of Living,83.7
+Sweden,2018,Pollution,19.1
+Sweden,2018,Purchasing Power,113.0
+Sweden,2018,Quality of Life,176.8
+Sweden,2018,Traffic Commute Time,30.7
+Sweden,2019,Cost of Living,71.6
+Sweden,2019,Pollution,18.0
+Sweden,2019,Purchasing Power,111.4
+Sweden,2019,Quality of Life,178.7
+Sweden,2019,Traffic Commute Time,30.3
+Sweden,2020,Cost of Living,69.8
+Sweden,2020,Pollution,18.1
+Sweden,2020,Purchasing Power,101.7
+Sweden,2020,Quality of Life,175.9
+Sweden,2020,Traffic Commute Time,30.5
+Sweden,2021,Cost of Living,79.2
+Sweden,2021,Pollution,18.4
+Sweden,2021,Purchasing Power,90.6
+Sweden,2021,Quality of Life,171.4
+Sweden,2021,Traffic Commute Time,29.9
+Sweden,2022,Cost of Living,71.7
+Sweden,2022,Pollution,18.3
+Sweden,2022,Purchasing Power,98.1
+Sweden,2022,Quality of Life,175.3
+Sweden,2022,Traffic Commute Time,29.4
