@@ -186,24 +186,41 @@ function createChoropleth() {
   const legendX = (width - legendWidth) / 2;
   const legendY = height - legendHeight - 30;
 
-  const legendScale = d3.scaleLinear()
-    .domain([d3.min(Object.values(currentData)) * 100, d3.max(Object.values(currentData))* 100])
-    .range([0, legendWidth]);
+  const ratioValues = Object.values(currentData);
+  const legendScale = d3.scaleOrdinal()
+    .domain([d3.min(ratioValues), d3.max(ratioValues)])
+    .range([d3.interpolateBlues(0), d3.interpolateBlues(0.2), d3.interpolateBlues(0.4), d3.interpolateBlues(0.6), d3.interpolateBlues(0.8), d3.interpolateBlues(1)]);
+  // TODO não funciona
+  const legendGroup = svg.append("g")
+    .style('transform', `translate(${legendX}px, ${legendY}px)`)
+    .call(
+      d3.axisBottom(legendScale)
+      .tickFormat(function(d) {
+        console.log(d + ' position');
+        return d + ' position';
+      })
+    );
+
+  legendGroup.selectAll("rect")
+    .data(legendScale.range())
+    .enter()
+    .append("rect")
+    .attr("x", (d, i) => i * legendWidth / 6)
+    .attr("y", 0)
+    .attr("width", legendWidth / 6)
+    .attr("height", legendHeight)
+    .style("fill", (d) => d)
+    // add ticks
+    .attr("stroke", "black")
+
 
   const legendAxis = d3.axisBottom(legendScale)
-    .ticks(5)
-    .tickFormat(d3.format(".1f"));
-
-  const legendGroup = svg.append("g")
-    .attr("transform", `translate(${legendX}, ${legendY})`);
-
-  legendGroup.append("rect")
-    .attr("width", legendWidth)
-    .attr("height", legendHeight)
-    .style("fill", "url(#legend-gradient)");
+    .tickFormat(d3.format(".2f"))
+    .tickSize(20)
+    .tickPadding(10);
 
   legendGroup.append("g")
-    .attr("transform", `translate(0, ${legendHeight})`)
+    .attr("transform", `translate(${legendWidth}, ${legendHeight})`)
     .call(legendAxis);
 
   legendGroup.append("text")
@@ -211,25 +228,6 @@ function createChoropleth() {
     .attr("y", legendHeight + 25)
     .attr("text-anchor", "middle")
     .text("Ratio of selected Vehicle types sales to total");
-
-  const defs = svg.append("defs");
-
-  const gradient = defs.append("linearGradient")
-    .attr("id", "legend-gradient")
-    .attr("x1", "0%")
-    .attr("y1", "0%")
-    .attr("x2", "100%")
-    .attr("y2", "0%");
-
-  gradient.append("stop")
-    .attr("offset", "0%")
-    .attr("stop-color", d3.interpolateBlues(colorScale.range()[0]))
-    .attr("stop-opacity", 1);
-
-  gradient.append("stop")
-    .attr("offset", "100%")
-    .attr("stop-color", d3.interpolateBlues(colorScale.range()[1]))
-    .attr("stop-opacity", 1);
 }
   
 
@@ -322,6 +320,7 @@ function createIdiom4() {
     .attr("stroke", "black")
     .on("mouseover", handleMouseOverIdiom4)
     .on("mouseout", handleMouseOutIdiom4)
+    .on("click", handleClickIdiom4)
     .text((d) => d.COUNTRY);
 
   // Maximum year in years interval
@@ -351,6 +350,7 @@ function createIdiom4() {
     .attr("stroke", "black")
     .on("mouseover", handleMouseOverIdiom4)
     .on("mouseout", handleMouseOutIdiom4)
+    .on("click", handleClickIdiom4)
     .text((d) => d.COUNTRY);
 
   // Create lines to connect both circles min and max
