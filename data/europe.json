@@ -97,7 +97,7 @@
         },
         {
           "type": "Polygon",
-          "properties": { "NAME": "Czech Republic" },
+          "properties": { "NAME": "Czechia" },
           "id": "CZ",
           "arcs": [[98, 99, 100, 101, 102, 103, 104, 105, 106, -76]]
         },
