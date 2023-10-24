@@ -81,7 +81,7 @@ function updateIdiom4() {
         }
         else if (selected_countries.includes(circle.textContent)) {
             circle.setAttribute("opacity", "1");
-            circle.setAttribute("stroke-width", "3");
+            circle.setAttribute("stroke-width", "1.5");
             console.log("yeet");
             // redraw them on top
             circle.parentNode.appendChild(circle);
