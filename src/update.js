@@ -88,3 +88,23 @@ function updateIdiom4() {
         }
     });
 }
+
+
+function updateDotPlot() {
+    const dots = document.querySelectorAll(".dot")
+    dots.forEach((dot) => {
+        if (selected_countries.length == 0) {
+            dot.setAttribute("opacity", "1");
+            dot.setAttribute("stroke-width", "0.5");
+        }
+        else if (!selected_countries.includes(dot.getAttribute("country"))) {
+            dot.setAttribute("opacity", "0.4");
+            dot.setAttribute("stroke-width", "0.5");
+        }
+        else if (selected_countries.includes(dot.getAttribute("country"))) {
+            dot.setAttribute("opacity", "1");
+            dot.setAttribute("stroke-width", "1.5");
+            dot.parentNode.appendChild(dot);
+        }
+    });
+}

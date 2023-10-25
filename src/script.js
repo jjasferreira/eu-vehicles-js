@@ -874,6 +874,10 @@ function createDotPlot() {
     .attr("cy", (d) => yScale(d.COUNTRY) + yScale.bandwidth() / 2)
     .attr("r", 4)
     .attr("fill", (d) => indexStyles[d.INDEX])
+    .attr("stroke", "black")
+    .attr("stroke-width", 0.5)
+    .attr("country", (d) => d.COUNTRY)
+    .on("click", handleClickDotPlot)
     .on("mouseover", handleMouseOver2)
     .on("mouseout", handleMouseOut2);
 

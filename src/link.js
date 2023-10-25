@@ -75,11 +75,13 @@ function handleClickChoropleth(event, item) {
         selected_countries.splice(selected_countries.indexOf(item.properties.NAME), 1);
         updateIdiom4();
         updateChoropleth();
+        updateDotPlot();
         return;
     }
     selected_countries.push(item.properties.NAME);
     updateIdiom4();
     updateChoropleth();
+    updateDotPlot();
 }
 
 function deselectAll() {
@@ -90,6 +92,7 @@ function deselectAll() {
     clones.forEach((clone) => clone.remove());
     updateChoropleth();
     updateIdiom4();
+    updateDotPlot();
 
 }
 
@@ -185,6 +188,7 @@ function handleClick4(event, item) {
     console.log("I'm here")
     updateChoropleth();
     updateIdiom4();
+    updateDotPlot();
 }
 
 
@@ -210,4 +214,21 @@ function handleMouseOut2(event, item) {
         .duration(500)
         .style("opacity", 0)
         .style("visibility", "hidden");
+}
+// Cleveland dot Plot click interactions
+function handleClickDotPlot(event, item) {
+    if (selected_countries.includes(item.COUNTRY)) {
+        selected_countries.splice(selected_countries.indexOf(item.COUNTRY), 1);
+        updateIdiom4();
+        updateChoropleth();
+        updateDotPlot();
+        return;
+    }
+    else {
+        selected_countries.push(item.COUNTRY);
+        updateIdiom4();
+        updateChoropleth();
+        updateDotPlot();
+        return;
+    }
 }
