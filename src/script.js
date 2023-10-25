@@ -873,7 +873,9 @@ function createDotPlot() {
     .attr("cx", (d) => xScale(+d.VALUE))
     .attr("cy", (d) => yScale(d.COUNTRY) + yScale.bandwidth() / 2)
     .attr("r", 4)
-    .attr("fill", (d) => indexStyles[d.INDEX]);
+    .attr("fill", (d) => indexStyles[d.INDEX])
+    .on("mouseover", handleMouseOver2)
+    .on("mouseout", handleMouseOut2);
 
   // Add a legend
   const legend = svg.selectAll(".legend")

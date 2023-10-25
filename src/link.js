@@ -186,3 +186,28 @@ function handleClick4(event, item) {
     updateChoropleth();
     updateIdiom4();
 }
+
+
+// Cleveland dot Plot Mouse over interactions
+function handleMouseOver2(event, item) {
+    // Show the tooltip
+    tooltip4
+        .transition()
+        .duration(250)
+        .style("opacity", 0.9);
+    tooltip4
+        .html(`<strong> ${item.COUNTRY} </strong> <br>
+        <i>${item.INDEX}: </i> ${parseFloat(item.VALUE).toFixed(2)}<br>`)
+        .style("left", (event.pageX + 10) + "px")
+        .style("top", (event.pageY - 30) + "px")
+        .style("visibility", "visible");
+}
+// Cleveland dot Plot Mouse out interactions
+function handleMouseOut2(event, item) {
+    // Hide the tooltip
+    tooltip4
+        .transition()
+        .duration(500)
+        .style("opacity", 0)
+        .style("visibility", "hidden");
+}
