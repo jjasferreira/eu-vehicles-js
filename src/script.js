@@ -371,8 +371,6 @@ function createChoropleth() {
       .style("padding", "5px")
   }
 }
-  
-
 
 // CUSTOM SCATTER PLOT
 function createIdiom4() {
@@ -718,16 +716,12 @@ function createIdiom4() {
   }
 }
 
-
 // Cleveland Dot Plot
 function createDotPlot() {
-
-  const margin = {top: 20, right: 20, bottom: 40, left: 60};
-
+  const margin = { top: 20, right: 20, bottom: 40, left: 60 };
   const container = d3.select("#idiom2");
   const width = container.node().clientWidth;
   const height = container.node().clientHeight;
-
   const svg = d3
     .select("#idiom2")
     .append("svg")
@@ -736,11 +730,123 @@ function createDotPlot() {
     .append("g")
     .attr("transform", `translate(${margin.left},${margin.top})`);
 
-  // Define the years you want to display
-  const selectedYears = [2018]; // You can customize this list
+  // Filter data for selected countries
+  const selectedCountries = all_countries;
+
+  const filteredData = gd_indexes.filter((d) => selectedCountries.includes(d.COUNTRY));
+
+  // Function to calculate the average value for each index type for each country for selected years
+  function calculateAverageValues(data, selectedYears) {
+    const countryIndexAverages = {};
+
+    data.forEach((d) => {
+      if (selectedYears.includes(+d.YEAR)) {
+        const key = d.COUNTRY;
+        if (!countryIndexAverages[key]) {
+          countryIndexAverages[key] = {};
+        }
+        if (!countryIndexAverages[key][d.INDEX]) {
+          countryIndexAverages[key][d.INDEX] = { sum: 0, count: 0 };
+        }
+        countryIndexAverages[key][d.INDEX].sum += +d.VALUE;
+        countryIndexAverages[key][d.INDEX].count += 1;
+      }
+    });
+
+    const averages = [];
+
+    for (const country in countryIndexAverages) {
+      for (const index in countryIndexAverages[country]) {
+        const avg = countryIndexAverages[country][index].sum / countryIndexAverages[country][index].count;
+        averages.push({ COUNTRY: country, INDEX: index, VALUE: avg });
+      }
+    }
+
+    return averages;
+  }
+  // Calculate the average GDP values for each country during selectedYears
+  function calculateAverageGDP(data, selectedYears) {
+    const countryGDPAverages = {};
+
+    data.forEach((d) => {
+      if (selectedYears.includes(+d.YEAR)) {
+        const key = d.COUNTRY;
+        if (!countryGDPAverages[key]) {
+          countryGDPAverages[key] = { sum: 0, count: 0 };
+        }
+        countryGDPAverages[key].sum += +d.VALUE;
+        countryGDPAverages[key].count += 1;
+      }
+    });
+
+    const averages = [];
+
+    for (const country in countryGDPAverages) {
+      const avgGDP = countryGDPAverages[country].sum / countryGDPAverages[country].count;
+      averages.push({ COUNTRY: country, AVG_GDP: avgGDP });
+    }
+
+    // Sort selectedCountries by average GDP values in descending order
+    selectedCountries.sort((a, b) => {
+      const avgGDP_A = averages.find((c) => c.COUNTRY === a);
+      const avgGDP_B = averages.find((c) => c.COUNTRY === b);
+
+      if (avgGDP_A && avgGDP_B) {
+        return avgGDP_A.AVG_GDP - avgGDP_B.AVG_GDP;
+      }
+      return 0; // Handle cases where data is missing for a country
+    });
+
+    return averages;
+  }
+
+  // Define the selected years (e.g., 2020 and 2021)
+  const selectedYears = [2018, 2019];
   
-  filteredData = gd_indexes.filter((d) => d.YEAR === 2018)
-  // Define the index types
+  // Define the selected Index Types
+  const selectedIndexTypes = [
+    "Cost of Living",
+    "Pollution",
+    "Purchasing Power",
+    "Quality of Life",
+    "Traffic Commute Time",
+  ];
+
+  // Call the function to calculate average values for the selected years
+  const averageData = calculateAverageValues(gd_indexes, selectedYears);
+  
+  // Order Coutries by ascending GDP
+  const averageGDPData = calculateAverageGDP(d_gdp, selectedYears);
+
+  // Filter by selecter index types
+  const filteredAverageData = averageData.filter((d) => selectedIndexTypes.includes(d.INDEX));
+
+  // Create a scale for the y-axis (countries)
+  const yScale = d3
+    .scaleBand()
+    .domain(selectedCountries)
+    .range([height, margin.top])
+    .padding(0.2);
+
+  // Create a scale for the x-axis (index values)
+  const xScale = d3
+    .scaleLinear()
+    .domain([0, d3.max(filteredAverageData, (d) => +d.VALUE)])
+    .range([0, width]);
+
+  // Create x-axis
+  svg
+    .append("g")
+    .attr("class", "x-axis")
+    .attr("transform", `translate(0, ${height})`)
+    .call(d3.axisBottom(xScale));
+
+  // Create y-axis
+  svg
+    .append("g")
+    .attr("class", "y-axis")
+    .call(d3.axisLeft(yScale));
+
   const indexTypes = [
     "Cost of Living",
     "Pollution",
@@ -749,63 +855,27 @@ function createDotPlot() {
     "Traffic Commute Time",
   ];
 
-  // Define colors for each index type
-  const colorScale = d3.scaleOrdinal()
-    .domain(indexTypes)
-    .range(["red", "blue", "green", "orange", "purple"]);
-
-  // Filter the data for selected years
-
-
-  // Create a scale for the y-axis (countries)
-  const yScale = d3
-    .scaleBand()
-    .domain(filteredData.map((d) => d.Country))
-    .range([margin.top, innerHeight + margin.top])
-    .padding(0.2);
-
-  // Create a scale for the x-axis (index values)
-  const xScale = d3
-    .scaleLinear()
-    .range([0, width]);
-
-  // Create the y-axis
-  svg.append("g")
-    .attr("class", "y-axis")
-    .attr("transform", `translate(${margin.left}, 0)`)
-
-  // Create a y-axis for the dot plot
-  svg
-    .append("g")
-    .attr("class", "y-axis")
-    .call(d3.axisLeft(yScale))
-    .selectAll("text")
-    .style("text-anchor", "end")
-    .attr("dx", "-.8em")
-    .attr("font-size", "5px")
-
-  // Add a label for the y-axis
-  svg
-    .append("text")
-    .attr("class", "y-axis-label")
-    .attr("x", -height / 2)
-    .attr("y", -margin.left + 30)
-    .style("text-anchor", "middle")
-    .attr("transform", "rotate(-90)")
-    .text("Country");
+  const indexStyles = {
+    "Cost of Living": "blue",
+    "Pollution": "red",
+    "Purchasing Power": "orange",
+    "Quality of Life": "green",
+    "Traffic Commute Time": "purple",
+  };
 
   // Create dots for each data point
-  svg.selectAll(".dot")
-    .data(filteredData)
+  const dots = svg
+    .selectAll(".dot")
+    .data(filteredAverageData)
     .enter()
     .append("circle")
     .attr("class", "dot")
-    .attr("cx", (d) => xScale(+d.Value))
-    .attr("cy", (d) => yScale(d.Country) + yScale.bandwidth() / 2)
-    .attr("r", 4) // Customize the radius as needed
-    .attr("fill", (d) => colorScale(d.Index))
+    .attr("cx", (d) => xScale(+d.VALUE))
+    .attr("cy", (d) => yScale(d.COUNTRY) + yScale.bandwidth() / 2)
+    .attr("r", 4)
+    .attr("fill", (d) => indexStyles[d.INDEX]);
 
-  // Add legend
+  // Add a legend
   const legend = svg.selectAll(".legend")
     .data(indexTypes)
     .enter()
@@ -817,7 +887,7 @@ function createDotPlot() {
     .attr("x", width - margin.right)
     .attr("width", 18)
     .attr("height", 18)
-    .attr("fill", colorScale);
+    .attr("fill", (d) => indexStyles[d.INDEX]);
 
   legend.append("text")
     .attr("x", width - margin.right - 30)
@@ -827,10 +897,44 @@ function createDotPlot() {
     .text((d) => d);
 
   // Add x-axis label
-  svg.append("text")
+  svg
+    .append("text")
     .attr("class", "x-axis-label")
-    .attr("x", innerWidth / 2 + margin.left)
-    .attr("y", height)
+    .attr("x", width / 2)
+    .attr("y", height + margin.bottom - 10)
     .style("text-anchor", "middle")
-    .text("Index Value");
+    .text("Index Values");
+
+  // Create lines connecting the dots for each country
+  const countryGroups = svg.selectAll(".country-group")
+    .data(averageData)
+    .enter()
+    .filter((d, i, nodes) => {
+      // Filter to select only the first dot for each country
+      const country = d.COUNTRY;
+      const firstIndex = averageData.findIndex((item) => item.COUNTRY === country);
+      return i === firstIndex;
+    });
+
+  countryGroups.each(function (d, i) {
+    const country = d.COUNTRY;
+    const countryDots = dots.filter((dotData) => dotData.COUNTRY === country);
+    if (countryDots.size() > 1) {
+      const coordinates = [];
+      countryDots.each(function(dotData) {
+        const x = +d3.select(this).attr("cx");
+        const y = +d3.select(this).attr("cy");
+        coordinates.push([x, y]);
+      });
+
+      // Draw lines between the dots
+      svg.append("path")
+        .datum(coordinates)
+        .attr("class", "line")
+        .attr("d", d3.line())
+        .attr("stroke", "black")
+        .attr("fill", "none")
+        .attr("opacity", 0.1);
+    }
+  });
 }
