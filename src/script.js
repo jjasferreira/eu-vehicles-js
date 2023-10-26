@@ -718,10 +718,10 @@ function createIdiom4() {
 
 // Cleveland Dot Plot
 function createDotPlot() {
-  const margin = { top: 20, right: 20, bottom: 40, left: 60 };
+  const margin = { top: 40, right: 40, bottom: 40, left: 80 };
   const container = d3.select("#idiom2");
-  const width = container.node().clientWidth;
-  const height = container.node().clientHeight;
+  const width = container.node().clientWidth - margin.left - margin.right;
+  const height = container.node().clientHeight - margin.bottom - margin.top;
   const svg = d3
     .select("#idiom2")
     .append("svg")
@@ -848,19 +848,19 @@ function createDotPlot() {
     .call(d3.axisLeft(yScale));
 
   const indexTypes = [
+    "Traffic Commute Time",
     "Cost of Living",
     "Pollution",
     "Purchasing Power",
     "Quality of Life",
-    "Traffic Commute Time",
   ];
 
   const indexStyles = {
+    "Traffic Commute Time": "purple",
     "Cost of Living": "blue",
     "Pollution": "red",
     "Purchasing Power": "orange",
     "Quality of Life": "green",
-    "Traffic Commute Time": "purple",
   };
 
   // Create dots for each data point
@@ -887,19 +887,22 @@ function createDotPlot() {
     .enter()
     .append("g")
     .attr("class", "legend")
-    .attr("transform", (d, i) => `translate(0, ${i * 20})`);
+    .attr("transform", (d, i) => `translate(${i*100 + 50}, ${0})`);
 
-  legend.append("rect")
-    .attr("x", width - margin.right)
-    .attr("width", 18)
-    .attr("height", 18)
-    .attr("fill", (d) => indexStyles[d.INDEX]);
+  legend.append("circle")
+    .attr("cx", 30)
+    .attr("cy", 9)
+    .attr("r", 4)
+    .attr("stroke", "black")
+    .attr("stroke-width", 0.5)
+    .attr("fill", (d) => indexStyles[d]);
 
   legend.append("text")
-    .attr("x", width - margin.right - 30)
+    .attr("x", 20)
     .attr("y", 9)
     .attr("dy", ".35em")
     .style("text-anchor", "end")
+    .style("font-size", "10px")
     .text((d) => d);
 
   // Add x-axis label
