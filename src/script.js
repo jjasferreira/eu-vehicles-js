@@ -803,6 +803,9 @@ function createDotPlot() {
   // Define the selected years (e.g., 2020 and 2021)
   const selectedYears = [2018, 2019];
   
+  // Define the selected IndexType to order
+  const selectedIndex = "Cost of Living"
+
   // Define the selected Index Types
   const selectedIndexTypes = [
     "Cost of Living",
@@ -820,6 +823,18 @@ function createDotPlot() {
 
   // Filter by selecter index types
   const filteredAverageData = averageData.filter((d) => selectedIndexTypes.includes(d.INDEX));
+
+  // Sort selectedCountries based on the selected IndexType
+  selectedCountries.sort((a, b) => {
+    const valueA = averageData.find((d) => d.COUNTRY === a && d.INDEX === selectedIndex);
+    const valueB = averageData.find((d) => d.COUNTRY === b && d.INDEX === selectedIndex);
+    
+    if (valueA && valueB) {
+      return valueA.VALUE - valueB.VALUE;
+    }
+    
+    return 0; // Handle cases where data is missing for a country
+  });
 
   // Create a scale for the y-axis (countries)
   const yScale = d3
