@@ -232,10 +232,56 @@ function handleClickDotPlot(event, item) {
         return;
     }
 }
+
+// Helper function for Cleveland dot Plot buttons
+function sortSelectedCountries(selectedIndex) {
+    function calculateAverageValues(data, minYear, maxYear) {
+        const countryIndexAverages = {};
+    
+        data.forEach((d) => {
+          const year = +d.YEAR;
+          if (year >= minYear && year <= maxYear) {
+            const key = d.COUNTRY;
+            if (!countryIndexAverages[key]) {
+              countryIndexAverages[key] = {};
+            }
+            if (!countryIndexAverages[key][d.INDEX]) {
+              countryIndexAverages[key][d.INDEX] = { sum: 0, count: 0 };
+            }
+            countryIndexAverages[key][d.INDEX].sum += +d.VALUE;
+            countryIndexAverages[key][d.INDEX].count += 1;
+          }
+        });
+    
+        const averages = [];
+    
+        for (const country in countryIndexAverages) {
+          for (const index in countryIndexAverages[country]) {
+            const avg = countryIndexAverages[country][index].sum / countryIndexAverages[country][index].count;
+            averages.push({ COUNTRY: country, INDEX: index, VALUE: avg });
+          }
+        }
+    
+        return averages;
+      }
+    const averageData = calculateAverageValues(gd_indexes, minYear, maxYear);
+    all_countries.sort((a, b) => {
+        const valueA = averageData.find((d) => d.COUNTRY === a && d.INDEX === selectedIndex);
+        const valueB = averageData.find((d) => d.COUNTRY === b && d.INDEX === selectedIndex);
+        
+        if (valueA && valueB) {
+            return valueA.VALUE - valueB.VALUE;
+        }
+        
+        return 0; // Handle cases where data is missing for a country
+    });
+}
+
 // Cleveland dot Plot button click
 function handleButtonClickDotPlot(event, item) {
     console.log(`Button clicked: (Index: ${item})`);
     selectedIndex = item;
+    sortSelectedCountries(selectedIndex)
     updateDotPlot();
 }
 

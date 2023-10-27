@@ -109,7 +109,7 @@ function update4() {
 
 
 function updateDotPlot() {
-    const dots = document.querySelectorAll(".dot")
+    const dots = document.querySelectorAll(".dot");
     dots.forEach((dot) => {
         if (selected_countries.length == 0) {
             dot.setAttribute("opacity", "1");
@@ -124,5 +124,95 @@ function updateDotPlot() {
             dot.setAttribute("stroke-width", "1.5");
             dot.parentNode.appendChild(dot);
         }
+    });
+
+    svg = d3.select("#idiom2").select("svg");
+    const t = d3.transition().duration(1000); // Transition duration in milliseconds
+    const margin = { top: 40, right: 40, bottom: 40, left: 80 };
+    const container = d3.select("#idiom2");
+    const height = container.node().clientHeight - margin.bottom - margin.top;
+    const width = container.node().clientWidth - margin.left - margin.right;
+
+    // Update the Indexes values using minYear and maxYear
+    // Function to calculate the average value for each index type for each country for selected years
+    function calculateAverageValues(data, minYear, maxYear) {
+        const countryIndexAverages = {}
+
+        data.forEach((d) => {
+        const year = +d.YEAR;
+        if (year >= minYear && year <= maxYear) {
+            const key = d.COUNTRY;
+            if (!countryIndexAverages[key]) {
+            countryIndexAverages[key] = {};
+            }
+            if (!countryIndexAverages[key][d.INDEX]) {
+            countryIndexAverages[key][d.INDEX] = { sum: 0, count: 0 };
+            }
+            countryIndexAverages[key][d.INDEX].sum += +d.VALUE;
+            countryIndexAverages[key][d.INDEX].count += 1;
+        }
+        });
+
+        const averages = [];
+
+        for (const country in countryIndexAverages) {
+        for (const index in countryIndexAverages[country]) {
+            const avg = countryIndexAverages[country][index].sum / countryIndexAverages[country][index].count;
+            averages.push({ COUNTRY: country, INDEX: index, VALUE: avg });
+        }
+        }
+
+        return averages;
+    }
+
+    const averageData = calculateAverageValues(gd_indexes, minYear, maxYear);
+
+    const filteredAverageData = averageData.filter((d) => d.INDEX !== "Quality of Life");
+    // Create a scale for the x-axis (index values)
+    const xScale = d3
+        .scaleLinear()
+        .domain([0, d3.max(filteredAverageData, (d) => +d.VALUE)])
+        .range([0, width]);
+
+    // Update y-axis with transition
+    svg.select(".x-axis")
+        .transition(t)
+        .call(d3.axisBottom(xScale));
+
+    // Update the position of dots with transition
+    dots.forEach((dot) => {
+        const index = dot.getAttribute("index");
+        const country = dot.getAttribute("country");
+        function findDataPointByCountryAndIndex(country, index) {
+            return filteredAverageData.find((dataPoint) => dataPoint.COUNTRY === country && dataPoint.INDEX === index);
+        }
+        const value = findDataPointByCountryAndIndex(country, index)
+        const x = xScale(value.VALUE);
+
+        d3.select(dot)
+            .transition(t)
+            .attr("cx", x);
+    });
+
+    // Update the y-axis scale with the new order of selectedCountries
+    const yScale = d3
+        .scaleBand()
+        .domain(all_countries)
+        .range([height, margin.top])
+        .padding(0.2);
+
+    // Update y-axis with transition
+    svg.select(".y-axis")
+        .transition(t)
+        .call(d3.axisLeft(yScale));
+
+    // Update the position of dots with transition
+    dots.forEach((dot) => {
+        const country = dot.getAttribute("country");
+        const y = yScale(country) + yScale.bandwidth() / 2;
+
+        d3.select(dot)
+            .transition(t)
+            .attr("cy", y);
     });
 }
