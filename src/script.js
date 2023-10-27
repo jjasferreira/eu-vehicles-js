@@ -11,12 +11,14 @@ var gd_geo, d_geo;
 
 
 // Create a tooltip
+var tooltip1;
 var tooltip3;
 var tooltip4;
 
+var minYear = '2014';
+var maxYear = '2022';
+
 var selected_countries = [];
-var maxYear;
-var minYear;
 
 const all_countries = [ 'Austria', 'Belgium', 'Bulgaria', 'Croatia', 'Cyprus', 'Czechia', 'Denmark', 'Estonia', 'Finland', 'France', 'Germany', 'Greece', 'Hungary', 'Ireland', 'Italy', 'Latvia', 'Lithuania', 'Luxembourg', 'Malta', 'Netherlands', 'Poland', 'Portugal', 'Romania', 'Slovakia', 'Slovenia', 'Spain', 'Sweden'];
 
@@ -24,11 +26,11 @@ const all_countries = [ 'Austria', 'Belgium', 'Bulgaria', 'Croatia', 'Cyprus', '
 function startDashboard() {
 
   loadData().then(() => {
-    createIdiom4();
     createChoropleth();
-    //createParallelSets();
-    createDotPlot();
+    //createDotPlot();
     createLineChart();
+    create4();
+    createIdiom5();
   });
 }
 
@@ -50,7 +52,22 @@ async function loadData() {
 }
 
 function createLineChart() {
+  var selectedYearlySales = [];
 
+  // Loop through the data to calculate the total sales for each year
+  d_vehicles.forEach(function(d) {
+    var year = parseInt(d.YEAR);
+    var units = +d.UNITS; // Convert units to a number
+    var yearEntry = selectedYearlySales.find(entry => entry.YEAR === year);
+
+    if (yearEntry) {
+      yearEntry.UNITS += units; // Add to existing total
+    } else {
+      selectedYearlySales.push({ YEAR: year, UNITS: units }); // Initialize if it doesn't exist
+    }
+  });
+  
+  console.log(selectedYearlySales);
   // Set up dimensions and margins
   const margin = {top: 20, right: 20, bottom: 40, left: 60};
   //const width = 600 - margin.left - margin.right; 
@@ -59,8 +76,6 @@ function createLineChart() {
   const container = d3.select("#idiom1");
   const width = 420;
   const height = 180;
-
-  console.log(width, height );
 
   // Create SVG container
   const svg = d3.select("#idiom1")
@@ -71,19 +86,21 @@ function createLineChart() {
     .attr("transform", `translate(${margin.left},${margin.top})`); 
 
   // Initialize scales and axes
-  const x = d3.scaleTime()
-    .range([0, width])
-    .domain(d3.extent(d_vehicles, d => d.YEAR));
+  const xScale = d3.scalePoint()
+  .domain(selectedYearlySales.map(d => d.YEAR)) // Use map to extract years from the array of objects
+  .range([0, width])
+  .padding(0.1);
 
-  const y = d3.scaleLinear()
-    .range([height, 0])
-    .domain([0, d3.max(d_vehicles, d => d.UNITS)]);
+  const yScale = d3.scaleLinear()
+    .domain([0, d3.max(selectedYearlySales, d => d.UNITS)]) // Use the maximum UNITS value
+    .range([height, 0]);
 
-  const xAxis = d3.axisBottom(x)
-    .ticks(9)
-    .tickFormat(d3.format("d")); 
+
+  const xAxis = d3.axisBottom(xScale)
+    .ticks(9);
+    //.tickFormat(d3.format("d")); 
   
-  const yAxis = d3.axisLeft(y)
+  const yAxis = d3.axisLeft(yScale)
     .ticks(5);
 
   // Append axes
@@ -94,106 +111,200 @@ function createLineChart() {
   svg.append("g")
     .call(yAxis);
     // Initialize line generator 
+    
+  // Initialize line generator
   const line = d3.line()
-  .x(d => x(d.YEAR)) 
-  .y(d => y(d.UNITS));
-  
+    .x((d) => xScale(d.YEAR))
+    .y((d) => yScale(d.UNITS));
+
   // Append path element
-  const path = svg.append("path");
-  
-  /*
-  // Create vertical slider controls
-  let minYear = +d3.min(d_vehicles, d => d.YEAR); 
-  let maxYear = +d3.max(d_vehicles, d => d.YEAR);
+  svg
+    .append("path")
+    .datum(selectedYearlySales)
+    .attr("class", "line")
+    .attr("d", line)
+    .attr("fill", "none")
+    .attr("stroke", "steelblue")
+    .attr("stroke-width", 2);
 
-  const sliderLeft = svg.append("g")
-    .attr("class", "slider-left")
-    .attr("transform", `translate(${x(minYear)},0)`);
-
-  sliderLeft.append("line")
+    // append circles
+  svg
+    .selectAll(".circle")
+    .data(selectedYearlySales)
+    .enter()
+    .append("circle")
+    .attr("class", "circle data")
+    .attr("cx", (d) => xScale(d.YEAR))
+    .attr("cy", (d) => yScale(d.UNITS))
+    .attr("r", 5)
+    .attr("fill", "steelblue")
     .attr("stroke", "black")
-    .attr("y1", 0)
-    .attr("y2", height);
+    .on("mouseover", handleMouseOverLineChart)
+    .on("mouseout", handleMouseOutLineChart)
+    .append("title")
+    .text((d) => d.YEAR);
 
-  const handleLeft = sliderLeft.append("circle")
-    .attr("r", 6)
-    .attr("cy", height / 2)
-    .attr("cursor", "ew-resize")
-    .call(d3.drag()
-      .on("drag", () => {
-        const x = d3.event.x;
-        minYear = Math.round(x.invert(x));
-        minYear = Math.min(maxYear-1, minYear); 
-        update();
-      })  
+  // Initialize the selected range
+  var selectedRange = [parseInt(minYear), parseInt(maxYear)];
+
+  console.log(selectedRange[1]);
+
+  // Set up the width and height of the sliders
+  const sliderWidth = 2;
+  const sliderHeight = height;
+
+  // Create the sliders
+  const leftSlider = svg
+    .append("rect")
+    .attr("x", xScale(selectedRange[0]) - sliderWidth / 2)
+    .attr("y", 0)
+    .attr("width", sliderWidth)
+    .attr("height", sliderHeight)
+    .attr("fill", "navy")
+    .attr("opacity", "0.8")
+    .call(
+      d3
+      .drag()
+      .on("start", dragstarted)
+      .on("drag", draggedLeft)
+      .on("end", dragended)
+      )
+    ;
+
+    
+  const rightSlider = svg
+    .append("rect")
+    .attr("x", xScale(selectedRange[1]) - sliderWidth / 2)
+    .attr("y", 0)
+    .attr("width", sliderWidth)
+    .attr("height", sliderHeight)
+    .attr("fill", "navy")
+    .attr("opacity", "0.8")
+    .call(
+      d3
+      .drag()
+      .on("start", dragstarted)
+      .on("drag", draggedRight)
+      .on("end", dragended)
+      );
+
+  const handleRadius = 10; // Set the radius of the handle
+  const handleLeft = svg
+    .append("circle")
+    .attr("cx", xScale(selectedRange[0])) // Initial position of the handle
+    .attr("cy", sliderHeight / 2) // Vertically center the handle
+    .attr("r", handleRadius) // Set the radius of the handle
+    .attr("fill", "navy") // Set the handle color
+    .attr("stroke", "#333333")
+    .attr("stroke-width", 1.5) // Set the handle color
+    .attr("opacity", "0.8")
+    .call(
+      d3.drag()
+        .on("start", dragstarted)
+        .on("drag", draggedLeft)
+        .on("end", dragended)
+    );
+  
+  const handleRight = svg
+    .append("circle")
+    .attr("cx", xScale(selectedRange[1])) // Initial position of the handle
+    .attr("cy", sliderHeight / 2) // Vertically center the handle
+    .attr("r", handleRadius) // Set the radius of the handle
+    .attr("fill", "navy") // Set the handle color
+    .attr("stroke", "#333333")
+    .attr("stroke-width", 1.5) // Set the handle color
+    .attr("opacity", "0.8")
+    .call(
+      d3.drag()
+        .on("start", dragstarted)
+        .on("drag", draggedRight)
+        .on("end", dragended)
     );
 
-  const sliderRight = svg.append("g")  
-    .attr("class", "slider-right")
-    .attr("transform", `translate(${x(maxYear)},0)`);
-
-  sliderRight.append("line")
-    .attr("stroke", "black") 
-    .attr("y1", 0)
-    .attr("y2", height);
-
-  const handleRight = sliderRight.append("circle")   
-    .attr("r", 6)
-    .attr("cy", height / 2) 
-    .attr("cursor", "ew-resize")
-    .call(d3.drag()
-      .on("drag", () => {
-        const x = d3.event.x;
-        maxYear = Math.round(x.invert(x));
-        maxYear = Math.max(minYear+1, maxYear);
-        update();
-      })
-    );
-
-  // Initialize displayed data
-  update();
-
-  // Updates the chart when sliders change
-  function update() {
-    
-    // Filter data based on slider values 
-    const filteredData = d_vehicles.filter(d => {
-      return d.YEAR >= minYear && d.YEAR <= maxYear; 
-    });
-    
-    // Update domains
-    x.domain([minYear, maxYear]);
-    y.domain([0, d3.max(filteredData, d => d.UNITS)]); 
-
-    // Update path data
-    path
-      .datum(filteredData)
-      .attr("d", line);
-
-    // Update axis scales
-    xAxis.scale(x);
-    yAxis.scale(y);
-
-    // Update slider positions
-    sliderLeft.attr("transform", `translate(${x(minYear)},0)`); 
-    handleLeft.attr("cy", height/2);
-
-    sliderRight.attr("transform", `translate(${x(maxYear)},0)`);
-    handleRight.attr("cy", height/2);
-
-    // Redraw axes
-    svg.select(".x-axis").call(xAxis);  
-    svg.select(".y-axis").call(yAxis);
-
+  // Define the drag behavior for sliders
+  function dragstarted(event, d) {
+    d3.select(this).raise().classed("active", true);
   }
 
-  */
+  function draggedLeft(event, d) {
+    let x = event.x;
+    x = Math.max(0, Math.min(x, xScale(selectedRange[1]) - sliderWidth));
+    const newMinYear = Math.min(getClosestYear(x), selectedRange[1]);
+    selectedRange[0] = newMinYear;
+    //minYear = newMinYear;
+    handleLeft.attr("cx", xScale(newMinYear));
+    leftSlider.attr("x", xScale(newMinYear) - sliderWidth / 2);
+  }
+
+  function draggedRight(event, d) {
+    let x = event.x;
+    x = Math.max(xScale(selectedRange[0]) + sliderWidth, Math.min(x, width - sliderWidth));
+    const newMaxYear = Math.max(getClosestYear(x), selectedRange[0]);
+    selectedRange[1] = newMaxYear;
+    //maxYear = newMaxYear;
+    handleRight.attr("cx", xScale(newMaxYear));
+    rightSlider.attr("x", xScale(newMaxYear) - sliderWidth / 2);
+  }
+
+  function getClosestYear(x) {
+    // go from 2014 to 2022 and return the value of xScale that is closest to x
+    let closestYear = 2014;
+    let minDistance = 100000;
+    for (let i = 2014; i <= 2022; i++) {
+      if (Math.abs(xScale(i) - x) < minDistance) {
+        minDistance = Math.abs(xScale(i) - x);
+        closestYear = i;
+      }
+    }
+    return closestYear;
+  }
+
+  function dragended(event, d) {
+    d3.select(this).classed("active", false);
+    minYear = selectedRange[0].toString();
+    maxYear = selectedRange[1].toString();
+    selectionText.text(`Time range: ${minYear} to ${maxYear}`);
+    console.log("Chupa misto");
+    updateChoropleth();
+    update4();
+  }
+
+    // Add title 
+  svg.append("text")
+  .attr("x", width/2)
+  .attr("y", 0 - (margin.top/2) + 10)
+  .attr("text-anchor", "middle")  
+  .style("font-size", "16px") 
+  .style("text-decoration", "underline")  
+  .text("Total Units Sold for Selection");
+
+  // Add min/max text
+  const selectionText = svg.append("text")
+  .attr("x", 0)
+  .attr("y", height + margin.bottom - 10)
+  .text(`Time range: ${minYear} to ${maxYear}`)
+  .style("font-size", "12px");
+
+
+  // tooltip
+  {  
+    tooltip1 = d3.select("body")
+      .append("div")
+      .attr("class", "tooltip")
+      .style("position", "absolute")
+      .style("display", "block")
+      .style("opacity", 0);
+
+  }
+  
 }
 
 function createChoropleth() {
   // choropleth map in the idiom3 div container.
   const totalCountrySales = d3.group(gd_vehicles, (d) => d.COUNTRY);
   const selectedCountrySales = d3.group(d_vehicles, (d) => d.COUNTRY);
+
+  console.log(selectedCountrySales);
 
   // Initialize an empty object to store the aggregated data
   var currentData = {};
@@ -219,7 +330,7 @@ function createChoropleth() {
   
   // Declare a color scale for the choropleth map
   const colorScale = d3
-    .scaleLog()
+    .scaleLinear()
     .domain([
       d3.min(Object.values(currentData)),
       d3.max(Object.values(currentData)),
@@ -307,53 +418,21 @@ function createChoropleth() {
   }
 
   // Add the legend
-  /* {
-    const legendWidth = width * 0.4;
-    const legendHeight = 15;
-    const legendX = 15;
-    const legendY = 20;
-    
-    const ratioValues = Object.values(currentData);
-    const legendScale = d3.scaleQuantize()
-    .domain([d3.min(ratioValues), d3.max(ratioValues)])
-    .range([d3.interpolateBlues(0), d3.interpolateBlues(0.2), d3.interpolateBlues(0.4), d3.interpolateBlues(0.6), d3.interpolateBlues(0.8), d3.interpolateBlues(1)]);
-    
-    const legendGroup = svg.append("g")
-    .style('transform', `translate(${legendX}px, ${legendY}px)`);
-    
-    legendGroup.selectAll("rect")
-    .data(legendScale.range())
-    .enter()
-    .append("rect")
-    .attr("x", (d, i) => i * legendWidth / 6)
-    .attr("y", 0)
-    .attr("width", legendWidth / 6)
-    .attr("height", legendHeight)
-    .style("fill", (d) => d)
-    .attr("stroke", "black");
+  {
 
-    const legendAxis = d3
-    .axisBottom(legendScale)
-    .tickFormat(d3.format(".2f"))
-    .tickValues(legendScale.domain())
-    .tickSize(5)
-    .tickPadding(5)
-    .tickSizeOuter(0);
-    
-    legendGroup.append("g")
-    .attr("transform", `translate(0, ${legendHeight})`)
-    .call(legendAxis)
-    .select(".domain").remove();
-    /*
-    
-    legendGroup.append("text")
-    .attr("x", legendWidth / 2)
-    .attr("y", -10)
-    .attr("text-anchor", "middle")
-    .style("font-size", "12px")
-    .text("Ratio of selected Vehicle types sales to total");
+    let max = d3.max(Object.values(currentData));
+    let min = d3.min(Object.values(currentData));
+    let l = Legend(d3.scaleSequential([min, max], d3.interpolateBlues), {
+      width: 100,
+      ticks: 5,
+      tickFormat: "%",
+      marginLeft: 10,
+    })
+
+    svg.append(() => l);
   }
-  */
+  
+  
   
   // tooltip
   {  
@@ -370,350 +449,57 @@ function createChoropleth() {
       .style("background-color", "white")
       .style("padding", "5px")
   }
+  // add title to top of map
+  {
+    
+    svg.append("text")
+      .attr("x", width/2)
+      .attr("y", 20)
+      .attr("text-anchor", "middle")  
+      .style("font-size", "16px") 
+      .style("text-decoration", "underline")  
+      .text("Total Units Sold by Country");
+  }
 }
 
-// CUSTOM SCATTER PLOT
-function createIdiom4() {
+function create4() {
 
-  const width = 420;
-  const height = 420;
+  const h = d3.select("#idiom4").node().getBoundingClientRect().height;
+  const w = d3.select("#idiom4").node().getBoundingClientRect().width;
 
   // Create an SVG element to hold the scatter plot
   const svg = d3
     .select("#idiom4")
     .append("svg")
-    .attr("width", width + 100)
-    .attr("height", height + 100)
-    .append("g")
-    .attr("transform", "translate(40, 35)");
-
-  // Values for the x axis scale
-  const minX = d3.min(d_vehicles, (d) => {
-    const air = d_air.find((o) => o.COUNTRY === d.COUNTRY && o.YEAR === d.YEAR);
-    const pop = d_population.find((o) => o.COUNTRY === d.COUNTRY && o.YEAR === d.YEAR);
-    return (air.VALUE / pop.VALUE) * 1000;
-  });
-  const maxX = d3.max(d_vehicles, (d) => {
-    const air = d_air.find((o) => o.COUNTRY === d.COUNTRY && o.YEAR === d.YEAR);
-    const pop = d_population.find((o) => o.COUNTRY === d.COUNTRY && o.YEAR === d.YEAR);
-    return (air.VALUE / pop.VALUE) * 1000;
-  });
-  // Values for the y axis scale
-  const countryYearGroup = d3.group(d_vehicles, (d) => d.COUNTRY, (d) => d.YEAR);
-  const maxY = d3.max(countryYearGroup.entries(), ([country, countryData]) => {
-    return d3.max(countryData.entries(), ([year, yearData]) => {
-      const units = d3.sum(yearData, (d) => d.UNITS);
-      const pop = d_population.find((d) => d.COUNTRY === country && d.YEAR === year);
-      return (units / pop.VALUE) * 1000;
-    });
-  });
-  // Values for the radius scale
-  const minR = d3.min(d_vehicles, (d) => {
-    const gdp = d_gdp.find((o) => o.COUNTRY === d.COUNTRY && o.YEAR === d.YEAR);
-    const pop = d_population.find((o) => o.COUNTRY === d.COUNTRY && o.YEAR === d.YEAR);
-    return (gdp.VALUE / pop.VALUE) * 1000;
-  });
-  const maxR = d3.max(d_vehicles, (d) => {
-    const gdp = d_gdp.find((o) => o.COUNTRY === d.COUNTRY && o.YEAR === d.YEAR);
-    const pop = d_population.find((o) => o.COUNTRY === d.COUNTRY && o.YEAR === d.YEAR);
-    return (gdp.VALUE / pop.VALUE) * 1000;
-  });
-
-  // Create x, y and r scales for the scatter plot
-  const xScale = d3
-    .scaleLinear()
-    .domain([0, 17])
-    .range([width, 0]);
-  const yScale = d3
-    .scaleLinear()
-    .domain([0, 13])
-    .range([height, 0]);
-  const rScale = d3
-    .scaleRadial()
-    .domain([minR, maxR])
-    .range([5, 15]);
-
-  // Minimum and maximum years interval
-  const minYear = d3.min(d_vehicles, (d) => d.YEAR);
-  const maxYear = d3.max(d_vehicles, (d) => d.YEAR);
-
-  // Lines connecting Circles
-  {
-    svg.append("defs") // Linear color gradient
-      .append("linearGradient")
-      .attr("id", "line-gradient")
-      .attr("x1", "0%")
-      .attr("y1", "0%")
-      .attr("x2", "100%")
-      .attr("y2", "0%")
-      .selectAll("stop")
-      .data([{offset: "0%", color: "#CC6521"}, {offset: "100%", color: "#663210"}])
-      .enter()
-      .append("stop")
-      .attr("offset", (d) => d.offset)
-      .attr("stop-color", (d) => d.color);
-    svg.selectAll(".line") // Lines
-      .data(all_countries)
-      .enter()
-      .append("line")
-      .attr("class", "line data")
-      .attr("stroke", "url(#line-gradient)")
-      .attr("stroke-width", "3")
-      .attr("opacity", "0.65")
-      .text((c) => c)
-      .attr("x1", (c) => {
-        const air = d_air.find((o) => o.COUNTRY === c && o.YEAR === minYear);
-        const pop = d_population.find((o) => o.COUNTRY === c && o.YEAR === minYear);
-        return xScale((air.VALUE / pop.VALUE) * 1000);
-      })
-      .attr("y1", (c) => {
-        const units = d3.sum(d_vehicles.filter((o) => o.COUNTRY === c && o.YEAR === minYear), (d) => d.UNITS);
-        const pop = d_population.find((o) => o.COUNTRY === c && o.YEAR === minYear);
-        return yScale((units / pop.VALUE) * 1000);
-      })
-      .attr("x2", (c) => {
-        const air = d_air.find((o) => o.COUNTRY === c && o.YEAR === maxYear);
-        const pop = d_population.find((o) => o.COUNTRY === c && o.YEAR === maxYear);
-        return xScale((air.VALUE / pop.VALUE) * 1000);
-      })
-      .attr("y2", (c) => {
-        const units = d3.sum(d_vehicles.filter((o) => o.COUNTRY === c && o.YEAR === maxYear), (d) => d.UNITS);
-        const pop = d_population.find((o) => o.COUNTRY === c && o.YEAR === maxYear);
-        return yScale((units / pop.VALUE) * 1000);
-      });
-  }
-  // Circles for Min Year
-  {
-    svg
-      .selectAll(".circle-min")
-      .data(all_countries)
-      .enter()
-      .append("circle")
-      .attr("class", "circle-min data")
-      .attr("fill", "#CC6521")
-      .attr("stroke", "black")
-      .attr("stroke-width", "1")
-      .text((c) => c)
-      .on("mouseover", handleMouseOver4)
-      .on("mouseout", handleMouseOut4)
-      .on("click", handleClick4)
-      .attr("x-data", (c) => {
-        const air = d_air.find((o) => o.COUNTRY === c && o.YEAR === minYear);
-        const pop = d_population.find((o) => o.COUNTRY === c && o.YEAR === minYear);
-        return ((air.VALUE / pop.VALUE) * 1000).toFixed(1);
-      })
-      .attr("cx", (c) => {
-        const air = d_air.find((o) => o.COUNTRY === c && o.YEAR === minYear);
-        const pop = d_population.find((o) => o.COUNTRY === c && o.YEAR === minYear);
-        return xScale((air.VALUE / pop.VALUE) * 1000);
-      })
-      .attr("y-data", (c) => {
-        const units = d3.sum(d_vehicles.filter((o) => o.COUNTRY === c && o.YEAR === minYear), (d) => d.UNITS);
-        const pop = d_population.find((o) => o.COUNTRY === c && o.YEAR === minYear);
-        return ((units / pop.VALUE) * 1000).toFixed(1);
-      })
-      .attr("cy", (c) => {
-        const units = d3.sum(d_vehicles.filter((o) => o.COUNTRY === c && o.YEAR === minYear), (d) => d.UNITS);
-        const pop = d_population.find((o) => o.COUNTRY === c && o.YEAR === minYear);
-        return yScale((units / pop.VALUE) * 1000);
-      })
-      .attr("r-data", (c) => {
-        const gdp = d_gdp.find((o) => o.COUNTRY === c && o.YEAR === minYear);
-        const pop = d_population.find((o) => o.COUNTRY === c && o.YEAR === minYear);
-        return ((gdp.VALUE / pop.VALUE) * 1000).toFixed(1);
-      })
-      .attr("r", (c) => {
-        const gdp = d_gdp.find((o) => o.COUNTRY === c && o.YEAR === minYear);
-        const pop = d_population.find((o) => o.COUNTRY === c && o.YEAR === minYear);
-        return rScale((gdp.VALUE / pop.VALUE) * 1000);
-      });
-  }
-  // Circles for Max Year
-  {
-    svg
-      .selectAll(".circle-max")
-      .data(all_countries)
-      .enter()
-      .append("circle")
-      .attr("class", "circle-max data")
-      .attr("fill", "#663210")
-      .attr("stroke", "black")
-      .attr("stroke-width", "1")
-      .text((c) => c)
-      .on("mouseover", handleMouseOver4)
-      .on("mouseout", handleMouseOut4)
-      .on("click", handleClick4)
-      .attr("tooltip-data", (c) => {
-        const air = d_air.find((o) => o.COUNTRY === c && o.YEAR === maxYear);
-        const units = d3.sum(d_vehicles.filter((o) => o.COUNTRY === c && o.YEAR === maxYear), (d) => d.UNITS);
-        const gdp = d_gdp.find((o) => o.COUNTRY === c && o.YEAR === maxYear);
-        const pop = d_population.find((o) => o.COUNTRY === c && o.YEAR === maxYear);
-        return [{"x": (air.VALUE / pop.VALUE) * 1000, "y": (units / pop.VALUE) * 1000, "r": (gdp.VALUE / pop.VALUE) * 1000}]
-      })
-      .attr("x-data", (c) => {
-        const air = d_air.find((o) => o.COUNTRY === c && o.YEAR === maxYear);
-        const pop = d_population.find((o) => o.COUNTRY === c && o.YEAR === maxYear);
-        return ((air.VALUE / pop.VALUE) * 1000).toFixed(1);
-      })
-      .attr("cx", (c) => {
-        const air = d_air.find((o) => o.COUNTRY === c && o.YEAR === maxYear);
-        const pop = d_population.find((o) => o.COUNTRY === c && o.YEAR === maxYear);
-        return xScale((air.VALUE / pop.VALUE) * 1000);
-      })
-      .attr("y-data", (c) => {
-        const units = d3.sum(d_vehicles.filter((o) => o.COUNTRY === c && o.YEAR === maxYear), (d) => d.UNITS);
-        const pop = d_population.find((o) => o.COUNTRY === c && o.YEAR === maxYear);
-        return ((units / pop.VALUE) * 1000).toFixed(1);
-      })
-      .attr("cy", (c) => {
-        const units = d3.sum(d_vehicles.filter((o) => o.COUNTRY === c && o.YEAR === maxYear), (d) => d.UNITS);
-        const pop = d_population.find((o) => o.COUNTRY === c && o.YEAR === maxYear);
-        return yScale((units / pop.VALUE) * 1000);
-      })
-      .attr("r-data", (c) => {
-        const gdp = d_gdp.find((o) => o.COUNTRY === c && o.YEAR === maxYear);
-        const pop = d_population.find((o) => o.COUNTRY === c && o.YEAR === maxYear);
-        return ((gdp.VALUE / pop.VALUE) * 1000).toFixed(1);
-      })
-      .attr("r", (c) => {
-        const gdp = d_gdp.find((o) => o.COUNTRY === c && o.YEAR === maxYear);
-        const pop = d_population.find((o) => o.COUNTRY === c && o.YEAR === maxYear);
-        return rScale((gdp.VALUE / pop.VALUE) * 1000);
-      });
-  }
-  // Tick marks and labels for x and y axes
-  {
-    var xTicks = [], yTicks = []; // Ticks
-    for (let index = 0; index <= 1; index += 0.25) {
-      xTicks.push(Math.round(xScale.invert(index * width)));
-      yTicks.push(Math.round(yScale.invert(index * height)));
-    }
-    svg.append("g")
-      .attr("class", "x-axis")
-      .attr("transform", `translate(0,${height})`)
-      .call(d3.axisBottom(xScale).tickFormat((d) => d).tickValues(xTicks).tickSizeOuter(0));
-    svg.append("g")
-      .attr("class", "y-axis")
-      .attr("transform", `translate(${width},0)`)
-      .call(d3.axisRight(yScale).tickFormat((d) => d).tickValues(yTicks).tickSizeOuter(0));
-    svg.append("text") // Labels
-      .attr("class", "x-axis-label")
-      .attr("x", width/2 - 2)
-      .attr("y", height+28)
-      .style("text-anchor", "end")
-      .text("Air pollutants")
-      .attr("font-weight", "500");
-    svg.append("text") // Labels
-      .attr("class", "x-axis-label")
-      .attr("x", width/2 + 2)
-      .attr("y", height+27)
-      .style("text-anchor", "start")
-      .text("(kg per th. people)")
-      .attr("font-size", "12px")
-    svg.append("text")
-      .attr("class", "y-axis-label")
-      .attr("x", width+30)
-      .attr("y", -12)
-      .style("text-anchor", "end")
-      .text("Selected vehicles sold")
-      .attr("font-weight", "500")
-      svg.append("text")
-      .attr("class", "y-axis-label")
-      .attr("x", width-10)
-      .attr("y", 0)
-      .style("text-anchor", "end")
-      .text("(per th. people)")
-      .attr("font-size", "12px")
-  }
-  // Year Legend
-  {
-    const yearLegendData = [
-      { cx: 20, r: 10, color: "#CC6521", label: "2014" },
-      { cx: 70, r: 10, color: "#663210", label: "2022" },
-    ];
-    const yearLegend = svg.append("g")
-      .attr("class", "legend")
-      .attr("transform", "translate(0, -10)");
-    yearLegend.selectAll("line") // Line
-      .data(yearLegendData)
-      .enter()
-      .append("line")
-      .attr("x1", yearLegendData[0].cx)
-      .attr("y1", 0)
-      .attr("x2", yearLegendData[1].cx)
-      .attr("y2", 0)
-      .attr("stroke", "#994C18")
-      .attr("stroke-width", "3")
-      .attr("opacity", "0.5");
-    yearLegend.selectAll("circle") // Circles
-      .data(yearLegendData)
-      .enter()
-      .append("circle")
-      .attr("cx", (d) => d.cx)
-      .attr("r", (d) => d.r)
-      .attr("fill", (d) => d.color);
-    yearLegend.selectAll("text") // Labels
-      .data(yearLegendData)
-      .enter()
-      .append("text")
-      .attr("x", (d, i) => {
-        if (i === 0) return d.cx - d.r - 30;
-        if (i === 1) return d.cx + d.r + 5;
-      })
-      .attr("y", (d) => d.r / 2)
-      .attr("font-size", "12px")
-      .attr("font-weight", "600")
-      .text((d) => d.label);
-  }
-  // GDP Legend
-  {
-    const gdpLegendData = [
-      // get the inverse of using 5 in the rScale
-      { cx: 0, r: 5, label: rScale.invert(5).toFixed(0) },
-      { cx: 15 + 25, r: 10, label: rScale.invert(10).toFixed(0) },
-      { cx: 40 + 50, r: 15, label: rScale.invert(15).toFixed(0) }
-    ];
-    const gdpLegend = svg.append("g")
-      .attr("class", "gdp-legend")
-      .attr("transform", "translate(-15, 25)");
-    gdpLegend.selectAll("circle")
-      .data(gdpLegendData)
-      .enter()
-      .append("circle")
-      .attr("r", (d) => d.r)
-      .attr("cx", (d) => d.cx)
-      .attr("cy", 18)
-      .attr("fill", "transparent")
-      .attr("stroke", "black")
-      .attr("stroke-width", "1");
-    gdpLegend.selectAll("text")
-      .data(gdpLegendData)
-      .enter()
-      .append("text")
-      .text((d) => d.label)
-      .attr("x", (d) => d.cx + d.r + 5)
-      .attr("y", 22)
-      .attr("font-size", "12px");
-    gdpLegend.append("text")
-      .text("GDP")
-      .attr("font-weight", "500")
-      .attr("x", -6)
-      .attr("y", 0);
-    gdpLegend.append("text")
-      .text("(mill. € per th. people)")
-      .attr("font-size", "12px")
-      .attr("x", 30)
-      .attr("y", -2);
-    console.log(gdpLegendData);
-  }
+    .attr("height", h)
+    .attr("width", w)
+    .attr("minYear", minYear)
+    .attr("maxYear", maxYear)
+    .append("g");
+  
+  // Create Lines gradient
+  svg.append("defs") // Linear color gradient
+    .append("linearGradient")
+    .attr("id", "line-gradient")
+    .attr("x1", "0%")
+    .attr("y1", "0%")
+    .attr("x2", "100%")
+    .attr("y2", "0%")
+    .selectAll("stop")
+    .data([{offset: "0%", color: "#CC6521"}, {offset: "100%", color: "#663210"}])
+    .enter()
+    .append("stop")
+    .attr("offset", (d) => d.offset)
+    .attr("stop-color", (d) => d.color);
+  
   // Tooltip
-  {
   tooltip4 = d3
     .select("#idiom4")
     .append("div")
     .attr("class", "tooltip")
     .style("opacity", 0);
-  }
+
+  update4();
 }
 
 // Cleveland Dot Plot
@@ -961,4 +747,64 @@ function createDotPlot() {
         .attr("opacity", 0.1);
     }
   });
+}
+
+function createIdiom5() {
+
+  const h = d3.select("#idiom5").node().getBoundingClientRect().height;
+  const w = d3.select("#idiom5").node().getBoundingClientRect().width;
+  const height = h - 50;
+  const width = w - 50;
+  
+  // Create an SVG element to hold the parallel sets diagram
+  const svg = d3
+    .select("#idiom5")
+    .append("svg")
+    .attr("height", height + 50)
+    .attr("width", width + 50)
+    .append("g")
+    .attr("transform", `translate(25, 25)`);
+
+  // Create x scales for the parallel sets
+  const tScale = d3
+    .scalePoint()
+    .domain([...new Set(gd_vehicles.map((d) => d.VEHICLE))])
+    .range([0, width]);
+  const bScale = d3
+    .scalePoint()
+    .domain([...new Set(gd_vehicles.map((d) => d.FUEL))])
+    .range([0, width]);
+
+  // Create lines to represent flows
+  svg
+    .selectAll(".line")
+    .data(gd_vehicles)
+    .enter()
+    .append("line")
+    .attr("x1", d => tScale(d.VEHICLE))
+    .attr("x2", d => tScale(d.VEHICLE))
+    .attr("y1", d => bScale(d.FUEL))
+    .attr("y2", d => bScale(d.FUEL))
+    .attr("stroke", "blue")
+    .attr("stroke-width", d => d.VALUE);
+
+  // Labels for x axes
+  {
+    svg.selectAll(".vehicle-label") // Vehicle labels
+      .data([...new Set(gd_vehicles.map((d) => d.VEHICLE))])
+      .enter()
+      .append("text")
+      .text(d => d)
+      .attr("x", d => tScale(d))
+      .attr("y", height)
+      .attr("text-anchor", "start");
+    svg.selectAll(".fuel-label") // Fuel labels
+      .data([...new Set(gd_vehicles.map((d) => d.FUEL))])
+      .enter()
+      .append("text")
+      .text(d => d)
+      .attr("x", d => bScale(d))
+      .attr("y", 0)
+      .attr("text-anchor", "start");
+  }
 }
