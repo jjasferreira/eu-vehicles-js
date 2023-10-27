@@ -167,7 +167,8 @@ function updateDotPlot() {
 
     const averageData = calculateAverageValues(gd_indexes, minYear, maxYear);
 
-    const filteredAverageData = averageData.filter((d) => d.INDEX !== "Quality of Life");
+    const filteredAverageData = averageData.filter((d) => !deactivatedIndexes.includes(d.INDEX));
+
     // Create a scale for the x-axis (index values)
     const xScale = d3
         .scaleLinear()
@@ -182,6 +183,13 @@ function updateDotPlot() {
     // Update the position of dots with transition
     dots.forEach((dot) => {
         const index = dot.getAttribute("index");
+        if (deactivatedIndexes.includes(index)){
+            dot.setAttribute("opacity", "0");
+            return;
+        }
+        else {
+            dot.setAttribute("opacity", "1");
+        }
         const country = dot.getAttribute("country");
         function findDataPointByCountryAndIndex(country, index) {
             return filteredAverageData.find((dataPoint) => dataPoint.COUNTRY === country && dataPoint.INDEX === index);

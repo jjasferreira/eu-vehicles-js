@@ -20,12 +20,7 @@ var maxYear = '2022';
 
 var selected_countries = [];
 
-var selectedIndexTypes = [
-  "Cost of Living",
-  "Pollution",
-  "Purchasing Power",
-  "Traffic Commute Time",
-];
+var deactivatedIndexes = [];
 
 var selectedIndex = ""
 
@@ -855,19 +850,8 @@ function createDotPlot() {
     return averages;
   }
 
-  // Define the selected Index Types
-  const selectedIndexTypes = [
-    "Cost of Living",
-    "Pollution",
-    "Purchasing Power",
-    "Traffic Commute Time",
-  ];
-
   // Call the function to calculate average values for the selected years
   const averageData = calculateAverageValues(gd_indexes, minYear, maxYear);
-
-  // Filter by selecter index types
-  const filteredAverageData = averageData.filter((d) => selectedIndexTypes.includes(d.INDEX));
 
   // Sort selectedCountries based on the selected IndexType
   selectedCountries.sort((a, b) => {
@@ -891,7 +875,7 @@ function createDotPlot() {
   // Create a scale for the x-axis (index values)
   const xScale = d3
     .scaleLinear()
-    .domain([0, d3.max(filteredAverageData, (d) => +d.VALUE)])
+    .domain([0, d3.max(averageData, (d) => +d.VALUE)])
     .range([0, width]);
 
   // Create x-axis
@@ -926,7 +910,7 @@ function createDotPlot() {
   // Create dots for each data point
   const dots = svg
     .selectAll(".dot")
-    .data(filteredAverageData)
+    .data(averageData)
     .enter()
     .append("circle")
     .attr("class", "dot")
@@ -973,6 +957,34 @@ function createDotPlot() {
     .style("font-weight", "bold")
     .style("cursor", "pointer")
     .text((d) => d);
+
+  const activation_button = svg.selectAll(".activation-button")
+    .data(indexTypes)
+    .enter()
+    .append("g")
+    .attr("class", "button")
+    .attr("transform", (d, i) => `translate(${i * 100}, ${0})`)
+    .on("click", handleActivateDotPlot);
+  activation_button.append("rect")
+    .attr("x", 10)
+    .attr("y", - 20)
+    .attr("width", 95)
+    .attr("height", 20)
+    .attr("rx", 5) // Set horizontal radius for rounded corners
+    .attr("ry", 5) // Set vertical radius for rounded corners
+    .attr("fill", "lightgrey")
+    .attr("stroke", "black")
+    .attr("stroke-width", 0.5)
+    .attr("opacity", 1);
+  activation_button.append("text")
+    .attr("x", 55)
+    .attr("y", - 10)
+    .attr("dy", ".35em")
+    .style("text-anchor", "middle")
+    .style("font-size", "8px")
+    .style("font-weight", "bold")
+    .style("cursor", "pointer")
+    .text((d) => "Activate");
 
   // Add x-axis label
   svg
@@ -1022,7 +1034,6 @@ function createDotPlot() {
         .attr("opacity", 0.1);
     }
   });
-
 }
 
 function createIdiom5() {

@@ -284,6 +284,18 @@ function handleButtonClickDotPlot(event, item) {
     sortSelectedCountries(selectedIndex)
     updateDotPlot();
 }
+function handleActivateDotPlot(event, item) {
+    if (!deactivatedIndexes.includes(item) && deactivatedIndexes.length == 4) {
+        return;
+    }
+    else if (deactivatedIndexes.includes(item)) {
+        deactivatedIndexes.splice(deactivatedIndexes.indexOf(item), 1);
+    }
+    else if (!deactivatedIndexes.includes(item)) {
+        deactivatedIndexes.push(item);
+    }
+    updateDotPlot();
+}
 
 function handleMouseOverLineChart(event, item) {
     tooltip1.html("Units sold: " + item.UNITS)
