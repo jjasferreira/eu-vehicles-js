@@ -10,7 +10,7 @@ function handleMouseOverChoropleth(event, item) {
         const circles = [...circles_min, ...circles_max];
 
         circles.forEach((circle) => {
-            if (circle.getAttribute("country") === item.properties.NAME) {
+            if (circle.textContent === item.properties.NAME) {
                 circle.setAttribute("stroke", "yellow");
                 circle.setAttribute("stroke-width", "1.5");
                 circle.parentNode.appendChild(circle); // move circle to end of parent's child nodes
@@ -44,17 +44,10 @@ function handleMouseOutChoropleth(event, item) {
 
     const circles_min = document.querySelectorAll(".circle-min.data");
     const circles_max = document.querySelectorAll(".circle-max.data");
-    circles_min.forEach((circle) => {
+    circles = [...circles_min, ...circles_max];
+    circles.forEach((circle) => {
         if (circle.getAttribute("country") === item.properties.NAME) {
-            if (!selected_countries.includes(circle.textContent)) {
-                circle.setAttribute("stroke-width", "0.5");
-            }
-            circle.setAttribute("stroke", "black");
-        }
-    });
-    circles_max.forEach((circle) => {
-        if (circle.getAttribute("country") === item.properties.NAME) {
-            if (!selected_countries.includes(circle.textContent)) {
+            if (!selected_countries.includes(circle.getAttribute("country"))) {
                 circle.setAttribute("stroke-width", "0.5");
             }
             circle.setAttribute("stroke", "black");
@@ -73,12 +66,9 @@ function handleClickChoropleth(event, item) {
     } // make sure it's an EU country
     if (selected_countries.includes(item.properties.NAME)) {
         selected_countries.splice(selected_countries.indexOf(item.properties.NAME), 1);
-        update4();
-        updateChoropleth();
-        updateDotPlot();
-        return;
+    } else {
+        selected_countries.push(item.properties.NAME);
     }
-    selected_countries.push(item.properties.NAME);
     update4();
     updateChoropleth();
     updateDotPlot();
@@ -180,12 +170,11 @@ function handleMouseOut4(event, item) {
 }
 
 function handleClick4(event, item) {
-    if (selected_countries.includes(item.COUNTRY)) {
-        selected_countries.splice(selected_countries.indexOf(item.COUNTRY), 1);
+    if (selected_countries.includes(item)) {
+        selected_countries.splice(selected_countries.indexOf(item), 1);
     } else {
-        selected_countries.push(item.COUNTRY);
+        selected_countries.push(item);
     }
-    console.log("I'm here")
     updateChoropleth();
     update4();
     updateDotPlot();
@@ -219,18 +208,12 @@ function handleMouseOut2(event, item) {
 function handleClickDotPlot(event, item) {
     if (selected_countries.includes(item.COUNTRY)) {
         selected_countries.splice(selected_countries.indexOf(item.COUNTRY), 1);
-        update4();
-        updateChoropleth();
-        updateDotPlot();
-        return;
-    }
-    else {
+    } else {
         selected_countries.push(item.COUNTRY);
-        update4();
-        updateChoropleth();
-        updateDotPlot();
-        return;
     }
+    update4();
+    updateChoropleth();
+    updateDotPlot();
 }
 
 // Helper function for Cleveland dot Plot buttons
@@ -324,4 +307,13 @@ function handleMouseOutLineChart() {
         .duration(500)
         .style("opacity", 0)
         .style("visibility", "hidden");
+}
+
+function handleMouseOver5(event, item) {
+}
+
+function handleMouseOut5(event, item) {
+}
+
+function handleClick5(event, item) {
 }

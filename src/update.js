@@ -1,63 +1,61 @@
 function updateChoropleth() {
 
     // Recompute data for selected countries
-     const totalCountrySales = d3.group(gd_vehicles, (d) => d.COUNTRY);
-     const selectedCountrySales = d3.group(d_vehicles, (d) => d.COUNTRY);
- 
-     // Initialize an empty object to store the aggregated data
-     var currentData = {};
- 
-     totalCountrySales.forEach((sales, country) => {
-         const totalSales = d3.sum(sales.filter(d => d.YEAR >= parseInt(minYear) && d.YEAR <= parseInt(maxYear)), (d) => +d.UNITS);
-         const selectedSales = d3.sum(selectedCountrySales.get(country).filter(d => d.YEAR >= parseInt(minYear) && d.YEAR <= parseInt(maxYear)), (d) => +d.UNITS);
-         console.log(country, selectedSales, totalSales);
-         currentData[country] = selectedSales / totalSales;
-     });
- 
-     // Get color scale 
-     const colorScale = d3
-         .scaleLinear()
-         .domain([
-             d3.min(Object.values(currentData)),
-             d3.max(Object.values(currentData)),
-         ])
-         .range([0, 1]);
- 
- 
-     const mapGroup = d3.select("#idiom3").select("g");
-     Object.keys(currentData).forEach(function(element) {
-         //console.log(element);
-         mapGroup
-             .transition()
-             .duration(500)
-             .attr("fill", "lightgrey")
-             .selectAll("path")
-             .filter(function(d) { 
-             return d.properties.NAME === element; 
-             })
-             .attr("fill", d3.interpolateBlues(colorScale(currentData[element])))
-             .attr("data", currentData[element]);
-         });
- 
-     const countries = document.querySelectorAll(".country.data");
-     countries.forEach((country) => {
-         if (selected_countries.length == 0) {
-             country.setAttribute("opacity", "1");
-             country.setAttribute("stroke-width", "0.5");
-         }
-         else if (!selected_countries.includes(country.textContent)) {
-             country.setAttribute("opacity", "0.5");
-             country.setAttribute("stroke-width", "0.5");
-         }
-         else if (selected_countries.includes(country.textContent)) {
-             country.setAttribute("opacity", "1");
-             country.setAttribute("stroke-width", "1");
-             // redraw them on top
-             country.parentNode.appendChild(country);
-         }
-     });
- }
+    const totalCountrySales = d3.group(gd_vehicles, (d) => d.COUNTRY);
+    const selectedCountrySales = d3.group(d_vehicles, (d) => d.COUNTRY);
 
+    // Initialize an empty object to store the aggregated data
+    var currentData = {};
+
+    totalCountrySales.forEach((sales, country) => {
+        const totalSales = d3.sum(sales.filter(d => d.YEAR >= parseInt(minYear) && d.YEAR <= parseInt(maxYear)), (d) => +d.UNITS);
+        const selectedSales = d3.sum(selectedCountrySales.get(country).filter(d => d.YEAR >= parseInt(minYear) && d.YEAR <= parseInt(maxYear)), (d) => +d.UNITS);
+        console.log(country, selectedSales, totalSales);
+        currentData[country] = selectedSales / totalSales;
+    });
+
+    // Get color scale 
+    const colorScale = d3
+        .scaleLinear()
+        .domain([
+            d3.min(Object.values(currentData)),
+            d3.max(Object.values(currentData)),
+        ])
+        .range([0, 1]);
+
+
+    const mapGroup = d3.select("#idiom3").select("g");
+    Object.keys(currentData).forEach(function(element) {
+        //console.log(element);
+        mapGroup
+            .transition()
+            .duration(500)
+            .attr("fill", "lightgrey")
+            .selectAll("path")
+            .filter(function(d) { 
+            return d.properties.NAME === element; 
+            })
+            .attr("fill", d3.interpolateBlues(colorScale(currentData[element])))
+            .attr("data", currentData[element]);
+        });
+
+    const countries = document.querySelectorAll(".country.data");
+    countries.forEach((country) => {
+        if (selected_countries.length == 0) {
+            country.setAttribute("opacity", "1");
+            country.setAttribute("stroke-width", "0.5");
+        }
+        else if (!selected_countries.includes(country.textContent)) {
+            country.setAttribute("opacity", "0.5");
+            country.setAttribute("stroke-width", "0.5");
+        }
+        else if (selected_countries.includes(country.textContent)) {
+            country.setAttribute("opacity", "1");
+            country.setAttribute("stroke-width", "1");
+            country.parentNode.appendChild(country); // redraw them on top
+        }
+    });
+}
 
 function update4() {
 
@@ -75,35 +73,208 @@ function update4() {
                 circle.setAttribute("opacity", "1");
                 circle.setAttribute("stroke-width", "1")
             }
-            else if (!selected_countries.includes(circle.textContent)) {
+            else if (!selected_countries.includes(circle.getAttribute("c"))) {
                 circle.setAttribute("opacity", "0.65");
                 circle.setAttribute("stroke-width", "1")
             }
-            else if (selected_countries.includes(circle.textContent)) {
+            else if (selected_countries.includes(circle.getAttribute("c"))) {
                 circle.setAttribute("opacity", "1");
-                circle.setAttribute("stroke-width", "1.5");
+                circle.setAttribute("stroke-width", "2");
                 circle.parentNode.appendChild(circle); // redraw them on top
             }
         });
     }
     // Year changes
-    if (minYear != prevMinYear) {
+    if (minYear != prevMinYear || maxYear != prevMaxYear) {
+
+        // Get the values of height and width
+        const width = +svg.attr("width") - 25;
+        const height = +svg.attr("height") - 25;
+        // Set new min and max year
         svg.attr("minYear", minYear);
-        svg.selectAll(".line.data")
-            .transition()
-            .duration(500)
-            .attr("x1", function() {
-                const c = d3.select(this).attr("country");
-                const air = d_air.find((o) => o.COUNTRY === c && o.YEAR === minYear);
-                const pop = d_population.find((o) => o.COUNTRY === c && o.YEAR === minYear);
-                return xScale((air.VALUE / pop.VALUE) * 1000);
-            })
-            .attr("y1", function() {
-                const c = d3.select(this).attr("country");
-                const units = d3.sum(d_vehicles.filter((o) => o.COUNTRY === c && o.YEAR === minYear), (d) => d.UNITS);
-                const pop = d_population.find((o) => o.COUNTRY === c && o.YEAR === minYear);
-                return yScale((units / pop.VALUE) * 1000);
+        svg.attr("maxYear", maxYear);
+
+        // Recalculate values for axes scales
+        const cd_vehicles = d_vehicles.filter((d) => d.YEAR >= minYear && d.YEAR <= maxYear);
+        const maxX = d3.max(cd_vehicles, (d) => {
+            const air = d_air.find((o) => o.COUNTRY === d.COUNTRY && o.YEAR === d.YEAR);
+            const pop = d_population.find((o) => o.COUNTRY === d.COUNTRY && o.YEAR === d.YEAR);
+            return (air.VALUE / pop.VALUE) * 1000;
+        });
+        const countryYearGroup = d3.group(cd_vehicles, (d) => d.COUNTRY, (d) => d.YEAR);
+        const maxY = d3.max(countryYearGroup.entries(), ([country, countryData]) => {
+            return d3.max(countryData.entries(), ([year, yearData]) => {
+                const units = d3.sum(yearData, (d) => d.UNITS);
+                const pop = d_population.find((d) => d.COUNTRY === country && d.YEAR === year);
+                return (units / pop.VALUE) * 1000;
             });
+        });
+        const minR = d3.min(cd_vehicles, (d) => {
+            const gdp = d_gdp.find((o) => o.COUNTRY === d.COUNTRY && o.YEAR === d.YEAR);
+            const pop = d_population.find((o) => o.COUNTRY === d.COUNTRY && o.YEAR === d.YEAR);
+            return (gdp.VALUE / pop.VALUE) * 1000;
+        });
+        const maxR = d3.max(cd_vehicles, (d) => {
+            const gdp = d_gdp.find((o) => o.COUNTRY === d.COUNTRY && o.YEAR === d.YEAR);
+            const pop = d_population.find((o) => o.COUNTRY === d.COUNTRY && o.YEAR === d.YEAR);
+            return (gdp.VALUE / pop.VALUE) * 1000;
+        });
+        // Create x, y and r scales for the scatter plot
+        const xScale = d3
+            .scaleLinear()
+            .domain([0, maxX*1.05])
+            .range([width-12.5, 25]);
+        const yScale = d3
+            .scaleLinear()
+            .domain([0, maxY*1.05])
+            .range([height-12.5, 25]);
+        const rScale = d3
+            .scaleRadial()
+            .domain([minR, maxR])
+            .range([5, 15]);
+
+        // Update lines connecting circles
+        {
+            svg.selectAll(".line.data")
+                .transition()
+                .duration(500)
+                .attr("x1", function() {
+                    const c = d3.select(this).attr("country");
+                    const air = d_air.find((o) => o.COUNTRY === c && o.YEAR === minYear);
+                    const pop = d_population.find((o) => o.COUNTRY === c && o.YEAR === minYear);
+                    return xScale((air.VALUE / pop.VALUE) * 1000);
+                })
+                .attr("y1", function() {
+                    const c = d3.select(this).attr("country");
+                    const units = d3.sum(d_vehicles.filter((o) => o.COUNTRY === c && o.YEAR === minYear), (d) => d.UNITS);
+                    const pop = d_population.find((o) => o.COUNTRY === c && o.YEAR === minYear);
+                    return yScale((units / pop.VALUE) * 1000);
+                })
+                .attr("x2", function() {
+                    const c = d3.select(this).attr("country");
+                    const air = d_air.find((o) => o.COUNTRY === c && o.YEAR === maxYear);
+                    const pop = d_population.find((o) => o.COUNTRY === c && o.YEAR === maxYear);
+                    return xScale((air.VALUE / pop.VALUE) * 1000);
+                })
+                .attr("y2", function() {
+                    const c = d3.select(this).attr("country");
+                    const units = d3.sum(d_vehicles.filter((o) => o.COUNTRY === c && o.YEAR === maxYear), (d) => d.UNITS);
+                    const pop = d_population.find((o) => o.COUNTRY === c && o.YEAR === maxYear);
+                    return yScale((units / pop.VALUE) * 1000);
+                });
+        }
+        // Update circles for min year
+        {
+            svg.selectAll(".circle-min.data")
+                .transition()
+                .duration(500)
+                .attr("cx", function() {
+                    const c = d3.select(this).attr("country");
+                    const air = d_air.find((o) => o.COUNTRY === c && o.YEAR === minYear);
+                    const pop = d_population.find((o) => o.COUNTRY === c && o.YEAR === minYear);
+                    return xScale((air.VALUE / pop.VALUE) * 1000);
+                })
+                .attr("cy", function() {
+                    const c = d3.select(this).attr("country");
+                    const units = d3.sum(d_vehicles.filter((o) => o.COUNTRY === c && o.YEAR === minYear), (d) => d.UNITS);
+                    const pop = d_population.find((o) => o.COUNTRY === c && o.YEAR === minYear);
+                    return yScale((units / pop.VALUE) * 1000);
+                })
+                .attr("r", function() {
+                    const c = d3.select(this).attr("country");
+                    const gdp = d_gdp.find((o) => o.COUNTRY === c && o.YEAR === minYear);
+                    const pop = d_population.find((o) => o.COUNTRY === c && o.YEAR === minYear);
+                    return rScale((gdp.VALUE / pop.VALUE) * 1000);
+                });
+        }
+        // Update circles for max year
+        {
+            svg.selectAll(".circle-max.data")
+                .transition()
+                .duration(500)
+                .attr("cx", function() {
+                    const c = d3.select(this).attr("country");
+                    const air = d_air.find((o) => o.COUNTRY === c && o.YEAR === maxYear);
+                    const pop = d_population.find((o) => o.COUNTRY === c && o.YEAR === maxYear);
+                    return xScale((air.VALUE / pop.VALUE) * 1000);
+                })
+                .attr("cy", function() {
+                    const c = d3.select(this).attr("country");
+                    const units = d3.sum(d_vehicles.filter((o) => o.COUNTRY === c && o.YEAR === maxYear), (d) => d.UNITS);
+                    const pop = d_population.find((o) => o.COUNTRY === c && o.YEAR === maxYear);
+                    return yScale((units / pop.VALUE) * 1000);
+                })
+                .attr("r", function() {
+                    const c = d3.select(this).attr("country");
+                    const gdp = d_gdp.find((o) => o.COUNTRY === c && o.YEAR === maxYear);
+                    const pop = d_population.find((o) => o.COUNTRY === c && o.YEAR === maxYear);
+                    return rScale((gdp.VALUE / pop.VALUE) * 1000);
+                });
+        }
+        // Update tick marks and labels
+        {
+            var xTicks = [], yTicks = []; // Ticks
+            for (let index = 0; index <= 1; index += 0.25) {
+                xTicks.push(Math.round(xScale.invert(30 + index * (width - 37.5))));
+                yTicks.push(Math.round(yScale.invert(30 + index * (height - 37.5))));
+            }
+            svg.select(".x-axis")
+                .transition()
+                .duration(500)
+                .call(d3.axisBottom(xScale).tickFormat((d) => d).tickValues(xTicks).tickSizeOuter(0));
+            svg.select(".y-axis")
+                .transition()
+                .duration(500)
+                .call(d3.axisRight(yScale).tickFormat((d) => d).tickValues(yTicks).tickSizeOuter(0));
+        }
+        // Update Year Legend
+        {
+            const yearLegendData = [
+                { cx: 20, r: 10, color: "#CC6521", label: minYear },
+                { cx: 70, r: 10, color: "#663210", label: maxYear },
+            ];
+            svg.select(".year-legend").selectAll("text").remove();
+            svg.select(".year-legend").selectAll("text")
+                .data(yearLegendData)
+                .enter()
+                .append("text")
+                .attr("x", (d, i) => {
+                    if (i === 0) return d.cx - d.r - 30;
+                        if (i === 1) return d.cx + d.r + 5;
+                    })
+                .attr("y", (d) => d.r / 2)
+                .attr("font-size", "12px")
+                .attr("font-weight", "600")
+                .text((d) => d.label);
+        }
+        // Update GDP Legend
+        {
+            const gdpLegendData = [
+                { cx: 0, r: 5, label: rScale.invert(5).toFixed(0) },
+                { cx: 15 + 25, r: 10, label: rScale.invert(10).toFixed(0) },
+                { cx: 40 + 50, r: 15, label: rScale.invert(15).toFixed(0) }
+            ];
+            svg.select(".gdp-legend").selectAll("text").remove();
+            svg.select(".gdp-legend").selectAll("test")
+                .data(gdpLegendData)
+                .enter()
+                .append("text")
+                .text((d) => d.label)
+                .attr("x", (d) => d.cx + d.r + 5)
+                .attr("y", 22)
+                .attr("font-size", "12px");
+            svg.select(".gdp-legend").append("text")
+                .text("GDP")
+                .attr("font-weight", "500")
+                .attr("x", -6)
+                .attr("y", 0);
+            svg.select(".gdp-legend").append("text")
+                .text("(mill. € per th. people)")
+                .attr("font-size", "12px")
+                .attr("x", 30)
+                .attr("y", -1.5);
+
+        }
     }
 }
 
