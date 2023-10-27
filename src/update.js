@@ -125,4 +125,32 @@ function updateDotPlot() {
             dot.parentNode.appendChild(dot);
         }
     });
+
+    svg = d3.select("#idiom2").select("svg");
+    const t = d3.transition().duration(1000); // Transition duration in milliseconds
+
+    // Update the y-axis scale with the new order of selectedCountries
+    const margin = { top: 40, right: 40, bottom: 40, left: 80 };
+    const container = d3.select("#idiom2");
+    const height = container.node().clientHeight - margin.bottom - margin.top;
+    const yScale = d3
+        .scaleBand()
+        .domain(all_countries)
+        .range([height, margin.top])
+        .padding(0.2);
+
+    // Update y-axis with transition
+    svg.select(".y-axis")
+        .transition(t)
+        .call(d3.axisLeft(yScale));
+
+    // Update the position of dots with transition
+    dots.forEach((dot) => {
+        const country = dot.getAttribute("country");
+        const y = yScale(country) + yScale.bandwidth() / 2;
+
+        d3.select(dot)
+            .transition(t)
+            .attr("cy", y);
+    });
 }
