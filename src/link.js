@@ -233,7 +233,7 @@ function handleClickDotPlot(event, item) {
     }
 }
 
-
+// Helper function for Cleveland dot Plot buttons
 function sortSelectedCountries(selectedIndex) {
     function calculateAverageValues(data, minYear, maxYear) {
         const countryIndexAverages = {};

@@ -946,7 +946,7 @@ function createDotPlot() {
   buttons.append("rect")
     .attr("x", 10)
     .attr("y", 4)
-    .attr("width", 100)
+    .attr("width", 95)
     .attr("height", 20)
     .attr("rx", 5) // Set horizontal radius for rounded corners
     .attr("ry", 5) // Set vertical radius for rounded corners
@@ -956,11 +956,13 @@ function createDotPlot() {
     .attr("opacity", 0.7);
 
   buttons.append("text")
-    .attr("x", 30)
+    .attr("x", 55)
     .attr("y", 16)
     .attr("dy", ".35em")
-    .style("text-anchor", "start")
-    .style("font-size", "10px")
+    .style("text-anchor", "middle")
+    .style("font-size", "8px")
+    .style("font-weight", "bold")
+    .style("cursor", "pointer")
     .text((d) => d);
 
   // Add x-axis label
