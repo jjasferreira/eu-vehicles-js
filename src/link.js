@@ -279,8 +279,18 @@ function sortSelectedCountries(selectedIndex) {
 
 // Cleveland dot Plot button click
 function handleButtonClickDotPlot(event, item) {
-    console.log(`Button clicked: (Index: ${item})`);
     selectedIndex = item;
+    const buttons = document.querySelectorAll(".button")
+    buttons.forEach((button) => {
+        if (button.textContent == item) {
+            button.setAttribute("stroke-widht", "1");
+            button.setAttribute("opacity", "1");
+        }
+        else {
+            button.setAttribute("stroke-widht", "0.5");
+            button.setAttribute("opacity", "0.8");
+        }
+    })
     sortSelectedCountries(selectedIndex)
     updateDotPlot();
 }
@@ -290,9 +300,11 @@ function handleActivateDotPlot(event, item) {
     }
     else if (deactivatedIndexes.includes(item)) {
         deactivatedIndexes.splice(deactivatedIndexes.indexOf(item), 1);
+        this.setAttribute("opacity", "1");
     }
     else if (!deactivatedIndexes.includes(item)) {
         deactivatedIndexes.push(item);
+        this.setAttribute("opacity", "0.5");
     }
     updateDotPlot();
 }
