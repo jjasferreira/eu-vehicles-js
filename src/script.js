@@ -20,6 +20,13 @@ var maxYear = '2022';
 
 var selected_countries = [];
 
+var selectedIndexTypes = [
+  "Cost of Living",
+  "Pollution",
+  "Purchasing Power",
+  "Traffic Commute Time",
+];
+
 var selectedIndex = ""
 
 const all_countries = [ 'Austria', 'Belgium', 'Bulgaria', 'Croatia', 'Cyprus', 'Czechia', 'Denmark', 'Estonia', 'Finland', 'France', 'Germany', 'Greece', 'Hungary', 'Ireland', 'Italy', 'Latvia', 'Lithuania', 'Luxembourg', 'Malta', 'Netherlands', 'Poland', 'Portugal', 'Romania', 'Slovakia', 'Slovenia', 'Spain', 'Sweden'];
@@ -269,6 +276,7 @@ function createLineChart() {
     console.log("Chupa misto");
     updateChoropleth();
     update4();
+    updateDotPlot();
   }
 
     // Add title 
@@ -852,7 +860,6 @@ function createDotPlot() {
     "Cost of Living",
     "Pollution",
     "Purchasing Power",
-    "Quality of Life",
     "Traffic Commute Time",
   ];
 
@@ -930,6 +937,8 @@ function createDotPlot() {
     .attr("stroke", "black")
     .attr("stroke-width", 0.5)
     .attr("country", (d) => d.COUNTRY)
+    .attr("value", (d) => d.VALUE)
+    .attr("index", (d) => d.INDEX)
     .on("click", handleClickDotPlot)
     .on("mouseover", handleMouseOver2)
     .on("mouseout", handleMouseOut2);
@@ -985,6 +994,7 @@ function createDotPlot() {
       return i === firstIndex;
     });
 
+  // Inside your code where you are drawing lines between the dots
   countryGroups.each(function (d, i) {
     const country = d.COUNTRY;
     const countryDots = dots.filter((dotData) => dotData.COUNTRY === country);
@@ -996,6 +1006,12 @@ function createDotPlot() {
         coordinates.push([x, y]);
       });
 
+      // Add start and end points to the coordinates
+      const start = [0, coordinates[0][1]]; // Start point at the left edge
+      const end = [width, coordinates[0][1]]; // End point at the right edge
+      coordinates.unshift(start);
+      coordinates.push(end);
+
       // Draw lines between the dots
       svg.append("path")
         .datum(coordinates)
@@ -1006,6 +1022,7 @@ function createDotPlot() {
         .attr("opacity", 0.1);
     }
   });
+
 }
 
 function createIdiom5() {
