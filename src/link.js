@@ -10,7 +10,7 @@ function handleMouseOverChoropleth(event, item) {
         const circles = [...circles_min, ...circles_max];
 
         circles.forEach((circle) => {
-            if (circle.textContent === item.properties.NAME) {
+            if (circle.getAttribute("country") === item.properties.NAME) {
                 circle.setAttribute("stroke", "yellow");
                 circle.setAttribute("stroke-width", "1.5");
                 circle.parentNode.appendChild(circle); // move circle to end of parent's child nodes
@@ -45,7 +45,7 @@ function handleMouseOutChoropleth(event, item) {
     const circles_min = document.querySelectorAll(".circle-min.data");
     const circles_max = document.querySelectorAll(".circle-max.data");
     circles_min.forEach((circle) => {
-        if (circle.textContent === item.properties.NAME) {
+        if (circle.getAttribute("country") === item.properties.NAME) {
             if (!selected_countries.includes(circle.textContent)) {
                 circle.setAttribute("stroke-width", "0.5");
             }
@@ -53,7 +53,7 @@ function handleMouseOutChoropleth(event, item) {
         }
     });
     circles_max.forEach((circle) => {
-        if (circle.textContent === item.properties.NAME) {
+        if (circle.getAttribute("country") === item.properties.NAME) {
             if (!selected_countries.includes(circle.textContent)) {
                 circle.setAttribute("stroke-width", "0.5");
             }
@@ -107,7 +107,7 @@ function handleMouseOver4(event, item) {
     });
     // Changes on Idiom 4
     document.querySelectorAll(".line.data").forEach((line) => {
-        if (line.textContent === item) {
+        if (line.getAttribute("country") === item) {
             line.setAttribute("stroke", "yellow");
             line.setAttribute("opacity", "1");
             line.parentNode.appendChild(line);
@@ -117,7 +117,7 @@ function handleMouseOver4(event, item) {
     const circles_max = document.querySelectorAll(".circle-max.data");
     circles = [...circles_min, ...circles_max];
     circles.forEach((circle) => {
-        if (circle.textContent === item) {
+        if (circle.getAttribute("country") === item) {
             circle.setAttribute("stroke", "yellow");
             circle.setAttribute("stroke-width", "1.5");
             circle.parentNode.appendChild(circle);
@@ -155,7 +155,7 @@ function handleMouseOut4(event, item) {
     });
     // Changes on Idiom 4
     document.querySelectorAll(".line.data").forEach((line) => {
-        if (line.textContent === item) {
+        if (line.getAttribute("country") === item) {
             line.setAttribute("stroke", "url(#line-gradient)");
             line.setAttribute("opacity", "0.65");
             line.parentNode.appendChild(line);
@@ -165,7 +165,7 @@ function handleMouseOut4(event, item) {
     const circles_max = document.querySelectorAll(".circle-max.data");
     circles = [...circles_min, ...circles_max];
     circles.forEach((circle) => {
-        if (circle.textContent === item) {
+        if (circle.getAttribute("country") === item) {
             circle.setAttribute("stroke", "black");
             circle.setAttribute("stroke-width", "1");
             circle.parentNode.appendChild(circle);
@@ -231,6 +231,12 @@ function handleClickDotPlot(event, item) {
         updateDotPlot();
         return;
     }
+}
+// Cleveland dot Plot button click
+function handleButtonClickDotPlot(event, item) {
+    console.log(`Button clicked: (Index: ${item})`);
+    selectedIndex = item;
+    updateDotPlot();
 }
 
 function handleMouseOverLineChart(event, item) {
