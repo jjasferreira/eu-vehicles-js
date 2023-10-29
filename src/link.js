@@ -6,33 +6,29 @@ function handleMouseOverChoropleth(event, item) {
         // find circles in idiom4
         const circles_min = document.querySelectorAll(".circle-min.data");
         const circles_max = document.querySelectorAll(".circle-max.data");
-        
         const circles = [...circles_min, ...circles_max];
-
         circles.forEach((circle) => {
-            if (circle.textContent === item.properties.NAME) {
+            if (circle.getAttribute("country") === item.properties.NAME) {
                 circle.setAttribute("stroke", "yellow");
                 circle.setAttribute("stroke-width", "1.5");
                 circle.parentNode.appendChild(circle); // move circle to end of parent's child nodes
             }
         });
-        // tooltip already exists
-
+        // Show the tooltip
+        tooltip3
+            .transition()
+            .duration(200)
+            .style("opacity", 0.9)
+            .style("visibility", "visible");
         tooltip3
             .style("left", event.pageX + "px")
             .style("top", event.pageY + "px")
             
         // select tooltip div and update its text
         tooltip3
-            .select("div")
             // Add a rectangle behind the tooltip text
-            .html(`Country: ${item.properties.NAME} <br> Ratio of selected vehicle sales to total: ${(100*this.getAttribute("data")).toFixed(2)}% <br>`);
-        
-        // Show the tooltip
-        tooltip3.transition()
-            .duration(200)
-            .style("opacity", 0.9)
-            .style("visibility", "visible");
+            .html(`<strong> ${item.properties.NAME} </strong> <br>
+            <i> Ratio: <i> ${(100*this.getAttribute("data")).toFixed(2)}% <br>`);
     }
 }
 
@@ -61,6 +57,7 @@ function handleMouseOutChoropleth(event, item) {
 }
 
 function handleClickChoropleth(event, item) {
+    console.log("clickChoropleth");
     if (!all_countries.includes(item.properties.NAME)) {
         return;
     } // make sure it's an EU country
@@ -72,6 +69,8 @@ function handleClickChoropleth(event, item) {
     update4();
     updateChoropleth();
     updateDotPlot();
+    updateLineChart();
+    update5();
 }
 
 function deselectAll() {
@@ -83,6 +82,9 @@ function deselectAll() {
     updateChoropleth();
     update4();
     updateDotPlot();
+    updateLineChart();
+    update5();
+
 
 }
 
@@ -178,6 +180,8 @@ function handleClick4(event, item) {
     updateChoropleth();
     update4();
     updateDotPlot();
+    updateLineChart();
+    update5();
 }
 
 
@@ -214,6 +218,8 @@ function handleClickDotPlot(event, item) {
     update4();
     updateChoropleth();
     updateDotPlot();
+    updateLineChart();
+    update5();
 }
 
 // Helper function for Cleveland dot Plot buttons
@@ -266,12 +272,12 @@ function handleButtonClickDotPlot(event, item) {
     const buttons = document.querySelectorAll(".button")
     buttons.forEach((button) => {
         if (button.textContent == item) {
-            button.setAttribute("stroke-widht", "1");
-            button.setAttribute("opacity", "1");
+            button.setAttribute("stroke-width", "1");
+            button.setAttribute("fill-opacity", "1");
         }
         else {
-            button.setAttribute("stroke-widht", "0.5");
-            button.setAttribute("opacity", "0.8");
+            button.setAttribute("stroke-width", "0.5");
+            button.setAttribute("fill-opacity", "0.75");
         }
     })
     sortSelectedCountries(selectedIndex)
@@ -310,9 +316,39 @@ function handleMouseOutLineChart() {
 }
 
 function handleMouseOver5(event, item) {
+    // Show the tooltip
+    tooltip5
+        .transition()
+        .duration(250)
+        .style("opacity", 0.9);
+    if (item.vehicle == "Minivans" || item.vehicle == "SUVs") {
+        tooltip5
+            .html(`<strong> ${item.fuel} ${item.vehicle} (${minYear} - ${maxYear}) </strong> <br>
+            ${(item.units/1000).toFixed(1)} <i> th. units <i>, ${(this.getAttribute("share"))} % of <i> All Cars <i> <br>
+            ${(this.getAttribute("share-fuel"))} % of <i> ${item.fuel}<i>, ${(this.getAttribute("share-vehicle"))} % of <i> ${item.vehicle}<i> <br>`)
+            // make tooltip appear on the left and above the mouse
+            .style("left", (event.pageX - 325) + "px")
+            .style("top", (event.pageY - 75) + "px")
+            .style("visibility", "visible");
+    } else {
+        tooltip5
+            .html(`<strong> ${item.fuel} ${item.vehicle} Cars (${minYear} - ${maxYear}) </strong> <br>
+            ${(item.units/1000).toFixed(1)} <i> th. units <i>, ${(this.getAttribute("share"))} % of <i> All Cars <i> <br>
+            ${(this.getAttribute("share-fuel"))} % of <i> ${item.fuel}<i>, ${(this.getAttribute("share-vehicle"))} % of <i> ${item.vehicle}<i> <br>`)
+            // make tooltip appear on the left and above the mouse
+            .style("left", (event.pageX - 325) + "px")
+            .style("top", (event.pageY - 75) + "px")
+            .style("visibility", "visible");
+    }
 }
 
 function handleMouseOut5(event, item) {
+    // Hide the tooltip
+    tooltip5
+        .transition()
+        .duration(500)
+        .style("opacity", 0)
+        .style("visibility", "hidden");
 }
 
 function handleClick5(event, item) {
