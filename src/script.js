@@ -10,10 +10,11 @@ var gd_geo, d_geo;
 
 
 
-// Create a tooltip
+// Create tooltips
 var tooltip1;
 var tooltip3;
 var tooltip4;
+var tooltip5;
 
 var minYear = '2014';
 var maxYear = '2022';
@@ -34,7 +35,7 @@ function startDashboard() {
     createDotPlot();
     createLineChart();
     create4();
-    createIdiom5();
+    create5();
   });
 }
 
@@ -72,15 +73,15 @@ function createLineChart() {
   });
   
   // Set up dimensions and margins
-  const height = 185;
-  const width = 415;
-  const margin = {top: 25, right: 20, bottom: 20, left: 60};
+  const height = d3.select("#idiom1").node().getBoundingClientRect().height;
+  const width = d3.select("#idiom1").node().getBoundingClientRect().width;
+  const margin = {top: 20, right: 20, bottom: 25, left: 60};
 
   // Create SVG container
   const svg = d3.select("#idiom1")
     .append("svg")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
+    .attr("width", width)
+    .attr("height", height)
     .append("g")
     .attr("transform", `translate(${margin.left},${margin.top})`); 
 
@@ -88,19 +89,21 @@ function createLineChart() {
   const xScale = d3
     .scalePoint()
     .domain(selectedYearlySales.map(d => d.YEAR)) // Use map to extract years from the array of objects
-    .range([0, width])
+    .range([0, width - margin.left - margin.right])
     .padding(0.1);
   const yScale = d3
     .scaleLinear()
     .domain([0, d3.max(selectedYearlySales, d => d.UNITS)]) // Use the maximum UNITS value
-    .range([height, 0]);
+    .range([height - margin.top - margin.bottom, 0]);
   const xAxis = d3.axisBottom(xScale).ticks(9);
   const yAxis = d3.axisLeft(yScale).ticks(5);
   // Append axes
   svg.append("g")
-    .attr("transform", `translate(0,${height})`) 
+    .attr("class", "x-axis")
+    .attr("transform", `translate(0,${height - margin.top - margin.bottom})`) 
     .call(xAxis);
   svg.append("g")
+    .attr("class", "y-axis")
     .call(yAxis);
     
   // Initialize line generator
@@ -111,6 +114,7 @@ function createLineChart() {
   // Append path element
   svg
     .append("path")
+    .attr("class", "line")
     .datum(selectedYearlySales)
     .attr("class", "line")
     .attr("d", line)
@@ -142,7 +146,7 @@ function createLineChart() {
 
   // Set up the width and height of the sliders
   const sliderWidth = 2;
-  const sliderHeight = height;
+  const sliderHeight = height - margin.top - margin.bottom;
 
   // Create the sliders
   const leftSlider = svg
@@ -183,6 +187,7 @@ function createLineChart() {
     .attr("rx", 5)
     .attr("fill", "#CC6521")
     .attr("stroke", "black")
+    .style("cursor", "pointer")
     .call(
       d3.drag()
         .on("start", dragstarted)
@@ -199,6 +204,7 @@ function createLineChart() {
     .attr("rx", 5)
     .attr("fill", "#663210")
     .attr("stroke", "black")
+    .style("cursor", "pointer")
     .call(
       d3.drag()
         .on("start", dragstarted)
@@ -249,16 +255,17 @@ function createLineChart() {
     minYear = selectedRange[0].toString();
     maxYear = selectedRange[1].toString();
     updateChoropleth();
-    update4();
     updateDotPlot();
+    update4();
+    update5();
   }
 
     // Add title 
   svg.append("text")
-  .attr("x", width/2)
-  .attr("y", 0 - (margin.top/2) + 10)
+  .attr("x", width/2 - 50)
+  .attr("y", 0 - (margin.top/2) + 12)
   .attr("text-anchor", "middle") 
-  .text("Total of Selected vehicles sold")
+  .text("Total selected vehicles sales")
   .attr("font-weight", "500");
 
   // Tooltip
@@ -422,12 +429,12 @@ function createChoropleth() {
     svg.append("text")
       .attr("x", 15)
       .attr("y", 25)
-      .text("Ratio of Selected vehicles")
+      .text("Ratio of selected vehicles sales")
       .attr("font-weight", "500");
     svg.append("text")
       .attr("x", 15)
       .attr("y", 42.5)
-      .text("to all vehicles sold")
+      .text("to total vehicles sales")
       .attr("font-weight", "500");
   }
 }
@@ -767,10 +774,10 @@ function create4() {
 
 // Cleveland Dot Plot
 function createDotPlot() {
-  const margin = { top: 40, right: 40, bottom: 40, left: 80 };
-  const container = d3.select("#idiom2");
-  const width = container.node().clientWidth - margin.left - margin.right;
-  const height = container.node().clientHeight - margin.bottom - margin.top;
+
+  const margin = { top: 40, right: 20, bottom: 30, left: 70 };
+  const height = d3.select("#idiom2").node().clientHeight - margin.bottom - margin.top;
+  const width = d3.select("#idiom2").node().clientWidth - margin.left - margin.right;
   const svg = d3
     .select("#idiom2")
     .append("svg")
@@ -857,19 +864,19 @@ function createDotPlot() {
     .call(d3.axisLeft(yScale));
 
   const indexTypes = [
-    "Traffic Commute Time",
+    "Quality of Life",
     "Cost of Living",
     "Pollution",
     "Purchasing Power",
-    "Quality of Life",
+    "Traffic Commute Time",
   ];
 
   const indexStyles = {
-    "Traffic Commute Time": "purple",
+    "Quality of Life": "green",
     "Cost of Living": "blue",
     "Pollution": "red",
     "Purchasing Power": "orange",
-    "Quality of Life": "green",
+    "Traffic Commute Time": "purple",
   };
 
   // Create dots for each data point
@@ -898,67 +905,62 @@ function createDotPlot() {
     .enter()
     .append("g")
     .attr("class", "button")
-    .attr("transform", (d, i) => `translate(${i * 100}, ${0})`)
+    .attr("transform", (d, i) => `translate(${-65 + i * 95}, ${0})`)
     .on("click", handleButtonClickDotPlot);
-
   buttons.append("rect")
     .attr("x", 10)
-    .attr("y", 4)
-    .attr("width", 95)
+    .attr("y", -8)
+    .attr("width", 90)
     .attr("height", 20)
-    .attr("rx", 5) // Set horizontal radius for rounded corners
-    .attr("ry", 5) // Set vertical radius for rounded corners
+    .attr("rx", 5)
+    .attr("ry", 5)
     .attr("fill", (d) => indexStyles[d])
     .attr("stroke", "black")
     .attr("stroke-width", 0.5)
-    .attr("opacity", 0.7);
-
+    .attr("fill-opacity", 0.75);
   buttons.append("text")
     .attr("x", 55)
-    .attr("y", 16)
-    .attr("dy", ".35em")
-    .style("text-anchor", "middle")
+    .attr("y", 5)
+    .attr("text-anchor", "middle")
     .style("font-size", "8px")
     .style("font-weight", "bold")
     .style("cursor", "pointer")
     .text((d) => d);
-
+  // Add activation buttons
   const activation_button = svg.selectAll(".activation-button")
     .data(indexTypes)
     .enter()
     .append("g")
     .attr("class", "button")
-    .attr("transform", (d, i) => `translate(${i * 100}, ${0})`)
+    .attr("transform", (d, i) => `translate(${-65 + i * 95}, ${0})`)
     .on("click", handleActivateDotPlot);
   activation_button.append("rect")
     .attr("x", 10)
-    .attr("y", - 20)
-    .attr("width", 95)
+    .attr("y", 12.5)
+    .attr("width", 57.5)
     .attr("height", 20)
-    .attr("rx", 5) // Set horizontal radius for rounded corners
-    .attr("ry", 5) // Set vertical radius for rounded corners
+    .attr("rx", 5)
+    .attr("ry", 5)
     .attr("fill", "lightgrey")
     .attr("stroke", "black")
     .attr("stroke-width", 0.5)
-    .attr("opacity", 1);
   activation_button.append("text")
-    .attr("x", 55)
-    .attr("y", - 10)
-    .attr("dy", ".35em")
-    .style("text-anchor", "middle")
+    .attr("x", 18)
+    .attr("y", 25.5)
     .style("font-size", "8px")
     .style("font-weight", "bold")
     .style("cursor", "pointer")
-    .text((d) => "Activate");
+    .text("Show/Hide");
 
-  // Add x-axis label
+  // Add title
   svg
     .append("text")
-    .attr("class", "x-axis-label")
-    .attr("x", width / 2)
-    .attr("y", height + margin.bottom - 10)
+    .attr("class", "title")
+    .attr("x", width / 2 - 25)
+    .attr("y", -17.5)
     .style("text-anchor", "middle")
-    .text("Index Values");
+    .style("font-weight", "500")
+    .text("Index Values for all EU countries");
 
   // Create lines connecting the dots for each country
   const countryGroups = svg.selectAll(".country-group")
@@ -1001,10 +1003,26 @@ function createDotPlot() {
   });
 }
 
-function createIdiom5() {
+function create5() {
+
+  // Get height and width of the container
+  const height = d3.select("#idiom5").node().getBoundingClientRect().height;
+  const width = d3.select("#idiom5").node().getBoundingClientRect().width;
+  margin = { top: 30, right: 250, bottom: 10, left: 25 };
+
+  // Create SVG to hold the heatmap
+  const svg = d3
+    .select("#idiom5")
+    .append("svg")
+    .attr("minYear", minYear)
+    .attr("maxYear", maxYear)
+    .attr("countries", all_countries)
+    .attr("width", width)
+    .attr("height", height);
+
   // Group data by vehicle and fuel type
   const groupByVehicleFuel = d3.group(gd_vehicles, d => d.VEHICLE, d => d.FUEL);
-  // for each vehicle and fuel, sum the units
+  // For each vehicle and fuel, sum the units
   const vehicleFuelUnits = [];
   groupByVehicleFuel.forEach((fuelMap, vehicle) => {
     fuelMap.forEach((units, fuel) => {
@@ -1012,43 +1030,26 @@ function createIdiom5() {
     });
   });
 
-  console.log(vehicleFuelUnits);
-
-  //compute total units sold across all vehicles and fuels
+  // Compute total units sold across all vehicles and fuels
   const totalUnits = d3.sum(vehicleFuelUnits, d => d.units);
+  const setVehicles = [...new Set(gd_vehicles.map(d => d.VEHICLE))];
+  const setFuels = [...new Set(gd_vehicles.map(d => d.FUEL))];
 
-  // labels_x are the different vehicle names in the dataset
-  const labels_x = [...new Set(gd_vehicles.map(d => d.VEHICLE))];
-  // labels_y are the different fuel types in the dataset
-  const labels_y = [...new Set(gd_vehicles.map(d => d.FUEL))];
-
-  console.log(labels_x, labels_y);
-
-  const height = d3.select("#idiom5").node().getBoundingClientRect().height;
-  const width = d3.select("#idiom5").node().getBoundingClientRect().width;
-
-  margin = { top: 30, right: 30, bottom: 30, left: 30 };
-  //append svg
-  const svg = d3.select("#idiom5")
-    .append("svg")
-    .attr("width", width)
-    .attr("height", height);
-
-  // x and y scales
-  const xScale = d3.scaleBand()
-    .domain(labels_x)
+  // Axes scales
+  const xScale = d3
+    .scaleBand()
+    .domain(setVehicles)
     .range([0, width - margin.left - margin.right])
     .padding(0.05);
-
-  const yScale = d3.scaleBand()
-    .domain(labels_y)
+  const yScale = d3
+    .scaleBand()
+    .domain(setFuels)
     .range([height - margin.top - margin.bottom, 0])
-    .padding(0.05);  
-  // append the axes
+    .padding(0.1);  
+
   svg.append("g")
     .attr("transform", `translate(${60}, ${25})`)
     .call(d3.axisTop(xScale));
-  
   svg.append("g")
     .attr("transform", `translate(${60}, ${25})`)
     .call(d3.axisLeft(yScale));
@@ -1060,12 +1061,12 @@ function createIdiom5() {
     }
     fuelUnits[d.fuel] += d.units;
   });
-
-  console.log(fuelUnits, "coiso");
-
-  // for each vehicle and fuel, compute the share of units sold
+  const vehicleUnits = {};
   vehicleFuelUnits.forEach(d => {
-    d.share = d.units / fuelUnits[d.fuel];
+    if (!vehicleUnits[d.vehicle]) {
+      vehicleUnits[d.vehicle] = 0;
+    }
+    vehicleUnits[d.vehicle] += d.units;
   });
     
   // create the rectangles
@@ -1080,7 +1081,10 @@ function createIdiom5() {
     .attr("height", yScale.bandwidth())
     .attr("vehicle", d => d.vehicle)
     .attr("fuel", d => d.fuel)
-    .attr("share", d => d.units/fuelUnits[d.fuel])
+    .attr("units", d => d.units)
+    .attr("share", d => ((d.units/totalUnits)*100).toFixed(1))
+    .attr("share-vehicle", d => ((d.units/vehicleUnits[d.vehicle])*100).toFixed(1))
+    .attr("share-fuel", d => ((d.units/fuelUnits[d.fuel])*100).toFixed(1))
     .on("mouseover", handleMouseOver5)
     .on("mouseout", handleMouseOut5)
     .on("click", handleClick5)
@@ -1091,13 +1095,13 @@ function createIdiom5() {
         .range([0, 1]);
       const color = d3.interpolateGreens(colorScale(d.units/fuelUnits[d.fuel]));
       return color;
-    });
+    })
+    .attr("stroke", "gray");
 
-  // tooltip
-  tooltip5 = d3.select("body")
+  // Tooltip
+  tooltip5 = d3
+    .select("#idiom4")
     .append("div")
     .attr("class", "tooltip")
-    .style("position", "absolute")
-    .style("display", "block")
     .style("opacity", 0);
 }
